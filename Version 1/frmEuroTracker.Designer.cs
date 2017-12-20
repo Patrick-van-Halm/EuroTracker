@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblFuel = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -41,16 +44,36 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Euro Tracker";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblFuel);
+            this.panel1.Location = new System.Drawing.Point(-1, 47);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(734, 376);
+            this.panel1.TabIndex = 1;
+            // 
+            // lblFuel
+            // 
+            this.lblFuel.AutoSize = true;
+            this.lblFuel.Location = new System.Drawing.Point(4, 4);
+            this.lblFuel.Name = "lblFuel";
+            this.lblFuel.Size = new System.Drawing.Size(45, 19);
+            this.lblFuel.TabIndex = 0;
+            this.lblFuel.Text = "Fuel:";
+            // 
             // frmEuroTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 423);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmEuroTracker";
             this.Text = "EuroTracker";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,6 +82,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblFuel;
     }
 }
 
