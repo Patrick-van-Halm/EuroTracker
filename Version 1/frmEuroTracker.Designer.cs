@@ -31,6 +31,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblFuel = new System.Windows.Forms.Label();
+            this.lblPosition = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblPosition);
             this.panel1.Controls.Add(this.lblFuel);
             this.panel1.Location = new System.Drawing.Point(-1, 47);
             this.panel1.Name = "panel1";
@@ -55,11 +57,20 @@
             // lblFuel
             // 
             this.lblFuel.AutoSize = true;
-            this.lblFuel.Location = new System.Drawing.Point(4, 4);
+            this.lblFuel.Location = new System.Drawing.Point(3, 13);
             this.lblFuel.Name = "lblFuel";
             this.lblFuel.Size = new System.Drawing.Size(45, 19);
             this.lblFuel.TabIndex = 0;
             this.lblFuel.Text = "Fuel:";
+            // 
+            // lblPosition
+            // 
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Location = new System.Drawing.Point(3, 45);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(70, 19);
+            this.lblPosition.TabIndex = 1;
+            this.lblPosition.Text = "Position:";
             // 
             // frmEuroTracker
             // 
@@ -84,6 +95,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblFuel;
+        private System.Windows.Forms.Label lblPosition;
     }
 }
 

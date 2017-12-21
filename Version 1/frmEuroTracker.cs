@@ -7,16 +7,16 @@ namespace Version_1
 {
     public partial class frmEuroTracker : Form
     {
-        Ets2SdkTelemetry telementry;
+        Ets2SdkTelemetry client;
 
         public frmEuroTracker()
         {
             InitializeComponent();
-
-            telementry = new Ets2SdkTelemetry();
-            telementry.Data += UpdateData;
-            telementry.JobFinished += TelemetryOnJobFinished;
-            telementry.JobStarted += TelemetryOnJobStarted;
+            
+            client = new Ets2SdkTelemetry();
+            client.Data += UpdateData;
+            client.JobFinished += TelemetryOnJobFinished;
+            client.JobStarted += TelemetryOnJobStarted;
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
@@ -31,7 +31,7 @@ namespace Version_1
 
         private void UpdateData(Ets2Telemetry data, bool updated)
         {
-            try
+            if(data != null)
             {
                 if (this.InvokeRequired)
                 {
@@ -42,10 +42,12 @@ namespace Version_1
                 float fuel = data.Drivetrain.Fuel;
                 float maxFuel = data.Drivetrain.FuelMax;
                 lblFuel.Text = $"Fuel: {Math.Round(fuel)}/{Math.Round(maxFuel)}";
-            }
-            catch
-            {
 
+                float posX = data.Physics.CoordinateX;
+                float posY = data.Physics.CoordinateY;
+                float posZ = data.Physics.CoordinateZ;
+
+                lblPosition.Text = $"Position: {posX}, {posY}, {posZ}";
             }
         }
     }
