@@ -40,7 +40,8 @@ namespace Version_1
                 }
 
                 float fuel = data.Drivetrain.Fuel;
-                lblFuel.Text = $"Fuel: {fuel}";
+                float maxFuel = data.Drivetrain.FuelMax;
+                lblFuel.Text = $"Fuel: {Math.Round(fuel)}/{Math.Round(maxFuel)}";
             }
             catch
             {
