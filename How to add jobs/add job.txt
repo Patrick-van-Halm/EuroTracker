@@ -1,0 +1,34 @@
+
+//Add job \/
+
+company : company.volatile.tree_et.frankfurt { //SOURCE
+ permanent_data: company.permanent.tree_et //?
+ delivered_trailer: null //?
+ delivered_pos: 0 //?
+ job_offer: 8 //+1 each offer
+ job_offer[0]: _nameless.15f.adbe.fba0
+ job_offer[1]: _nameless.15f.adbe.e940
+ job_offer[2]: _nameless.15f.adbe.fd60
+ job_offer[3]: _nameless.15f.adbe.e780
+ job_offer[4]: _nameless.15f.adbe.f4a0
+ job_offer[5]: _nameless.15f.adbe.dfa0
+ job_offer[6]: _nameless.15f.adbe.e160
+ job_offer[7]: _nameless.15f.adbe.87ed // ++ ADDED JOBS
+ discovered: true //is discovered
+}
+
+
+//Get jobinfo from player and add this to the other player \/
+
+job_offer_data : _nameless.15f.adbe.0000 {
+ cargo: cargo.fertilizer //CARGO
+ company_truck: renault_premium_4x2_c //TRUCK
+ variant: 3 //?
+ target: "euroacres.nurnberg" //TARGET
+ expiration_time: 729 //?
+ urgency: 2 //?
+ shortest_distance_km: 4000 //?
+ ferry_time: 0 //?
+ ferry_price: 0 //?
+ trailer_place: 0 //?
+}

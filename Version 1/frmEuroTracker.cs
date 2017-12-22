@@ -2,21 +2,28 @@
 using MySql.Data;
 using Ets2SdkClient;
 using System;
+using System.Drawing;
+using System.Diagnostics;
+using UnidecodeSharpFork;
 
 namespace Version_1
 {
     public partial class frmEuroTracker : Form
     {
         Ets2SdkTelemetry client;
+        SavegameReader save;
+        //DevTool dev;
+        float lastChassisDamagePercentage;
 
         public frmEuroTracker()
         {
             InitializeComponent();
-            
+            //dev = new DevTool("eurotrucks2");
             client = new Ets2SdkTelemetry();
             client.Data += UpdateData;
             client.JobFinished += TelemetryOnJobFinished;
             client.JobStarted += TelemetryOnJobStarted;
+            save = new SavegameReader();
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
@@ -31,13 +38,19 @@ namespace Version_1
 
         private void UpdateData(Ets2Telemetry data, bool updated)
         {
-            if(data != null)
+            try
             {
-                if (this.InvokeRequired)
+                if (data != null)
                 {
-                    this.Invoke(new TelemetryData(UpdateData), new object[2] { data, updated });
-                    return;
+
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke(new TelemetryData(UpdateData), new object[2] { data, updated });
+                        return;
+                    }
                 }
+
+
 
                 float fuel = data.Drivetrain.Fuel;
                 float maxFuel = data.Drivetrain.FuelMax;
@@ -48,7 +61,55 @@ namespace Version_1
                 float posZ = data.Physics.CoordinateZ;
 
                 lblPosition.Text = $"Position: {posX}, {posY}, {posZ}";
+
+                int stepHeight = imgDamage.Height / 100;
+                float chassisDamage = data.Damage.WearChassis;
+
+                float trailerDamage = data.Damage.WearTrailer;
+
+                float chassisDamagePercentage = chassisDamage * 100;
+                int currentDamagePercentage = 0;
+                if (lastChassisDamagePercentage != chassisDamagePercentage)
+                {
+                    lastChassisDamagePercentage = chassisDamagePercentage;
+                    for (int i = 0; i < Convert.ToInt32(chassisDamagePercentage); i++)
+                    {
+                        Application.DoEvents();
+                        currentDamagePercentage += stepHeight;
+                        Graphics g = imgDamage.CreateGraphics();
+                        g.Clear(Color.White);
+                        Pen p = new Pen(Color.Red, imgDamage.Width);
+                        g.FillRectangle(new SolidBrush(Color.Red), 0, imgDamage.Height - 10, imgDamage.Width, -currentDamagePercentage);
+                        p.Dispose();
+                        g.Dispose();
+                    }
+                }
+                string savegameTarget = (data.Job.CompanyDestination.Split(' ')[0] + "." + data.Job.CityDestination).ToLower().Unidecode();
+                lblTruck.Text = $"Truck: {data.TruckId} {data.Truck} {data.Job.TrailerId}";
+                lblCargo.Text = $"Cargo: {data.Job.Cargo}";
+                lblTarget.Text = $"Target: {savegameTarget}";
+                lblExpiration.Text = $"Expiration: {data.Job.Deadline}";
+                lblDistance.Text = $"Distance: {Convert.ToInt32(data.Job.NavigationDistanceLeft / 1000)} KM";
+
+
+                //lblMoney.Text = $"Money: {GetMoney()}";
             }
+            catch { }
         }
+
+
+
+        //64-Bit Memory Money Get
+
+        //private int GetMoney()
+        //{
+        //    int returnedData;
+        //    long baseAdress = Process.GetProcessesByName("eurotrucks2")[0].MainModule.BaseAddress.ToInt64();
+        //    returnedData = dev.Read(baseAdress + 0x0126DC50);
+        //    returnedData = dev.Read(returnedData + 0x1A8);
+        //    returnedData = dev.Read(returnedData + 0x288);
+        //    returnedData = dev.Read(returnedData + 0x1F0);
+        //    return returnedData;
+        //}
     }
 }
