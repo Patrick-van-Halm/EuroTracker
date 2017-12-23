@@ -10,6 +10,13 @@ namespace Version_1
 {
     public partial class frmEuroTracker : Form
     {
+        //Timers
+        Timer startup;
+
+
+
+
+
         Ets2SdkTelemetry client;
         SavegameReader save;
         //DevTool dev;
@@ -20,10 +27,25 @@ namespace Version_1
             InitializeComponent();
             //dev = new DevTool("eurotrucks2");
             client = new Ets2SdkTelemetry();
-            client.Data += UpdateData;
-            client.JobFinished += TelemetryOnJobFinished;
-            client.JobStarted += TelemetryOnJobStarted;
-            save = new SavegameReader();
+            //client.Data += UpdateData;
+            //client.JobFinished += TelemetryOnJobFinished;
+            //client.JobStarted += TelemetryOnJobStarted;
+
+            startup = new Timer();
+            startup.Interval = 100;
+            startup.Tick += CheckIfSetupCorrectly;
+            startup.Enabled = true;
+        }
+
+        private void CheckIfSetupCorrectly(object sender, EventArgs e)
+        {
+            if(save.GetSaveLocation() != "")
+            {
+                startup.Enabled = false;
+                client.Data += UpdateData;
+                client.JobFinished += TelemetryOnJobFinished;
+                client.JobStarted += TelemetryOnJobStarted;
+            }
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
@@ -49,9 +71,7 @@ namespace Version_1
                         return;
                     }
                 }
-
-
-
+                
                 float fuel = data.Drivetrain.Fuel;
                 float maxFuel = data.Drivetrain.FuelMax;
                 lblFuel.Text = $"Fuel: {Math.Round(fuel)}/{Math.Round(maxFuel)}";
@@ -88,13 +108,19 @@ namespace Version_1
                 lblTruck.Text = $"Truck: {data.TruckId} {data.Truck} {data.Job.TrailerId}";
                 lblCargo.Text = $"Cargo: {data.Job.Cargo}";
                 lblTarget.Text = $"Target: {savegameTarget}";
-                lblExpiration.Text = $"Expiration: {data.Job.Deadline}";
                 lblDistance.Text = $"Distance: {Convert.ToInt32(data.Job.NavigationDistanceLeft / 1000)} KM";
+                lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
 
 
                 //lblMoney.Text = $"Money: {GetMoney()}";
             }
             catch { }
+        }
+
+        private void frmEuroTracker_Shown(object sender, EventArgs e)
+        {
+            this.Hide();
+            save = new SavegameReader(this);
         }
 
 
