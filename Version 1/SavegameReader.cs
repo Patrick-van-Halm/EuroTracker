@@ -7,64 +7,63 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace Version_1
+namespace Tools
 {
-    class SavegameReader
+    public class SavegameReader
     {
-        frmEuroTracker tracker;
-
-        Form savegameSelectorForm;
-        ListBox savegames;
-
-
         private string profilesLocation;
         private string currentSaveGameLocation = "";
-        Timer loadInterval;        
-        
+        Timer loadInterval;
+
+        private int playerEXP;
         private int playerMoney;
 
-        public SavegameReader(frmEuroTracker tracker)
+        public SavegameReader()
         {
-            this.tracker = tracker;
             profilesLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Euro Truck Simulator 2\profiles\";
-            SaveGameLocator();
         }
 
         private void LoadProfileData(object sender, EventArgs e)
         {
-            DecryptSii(currentSaveGameLocation + @"\profile.sii");
-            GetEXP();
-
-            DecryptSii(currentSaveGameLocation + @"\save\autosave\game.sii");
-            playerMoney = GetMoney();
+            playerEXP = GetEXP();
+            playerMoney = GetMoneyFromSave();
         }
 
-        private void GetEXP()
+        private string GetSavedValue(string location, string key)
         {
-
-        }
-
-        private int GetMoney()
-        {
-            string fileLocation = currentSaveGameLocation + @"\save\autosave\game.sii";
-            if (File.Exists(fileLocation))
+            if (File.Exists(location))
             {
-                StreamReader sr = new StreamReader(fileLocation);
+                DecryptSii(location);
+                StreamReader sr = new StreamReader(location);
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    if (line.Contains("money_account: "))
+                    if (line.Contains(key))
                     {
-                        int money = 0;
-                        line = line.Replace("money_account: ", "");
-                        line = line.Replace(" ", "");
-
-                        int.TryParse(line, out money);
-                        return money;
+                        line = line.Replace(key, "");
+                        return line;
                     }
                 }
             }
-            return 0;
+            return "";
+        }
+
+        private int GetEXP()
+        {
+            string fileLocation = currentSaveGameLocation + @"\profile.sii";
+            string expString = GetSavedValue(fileLocation, " cached_experience: ");
+            int exp = 0;
+            int.TryParse(expString, out exp);
+            return exp;
+        }
+
+        private int GetMoneyFromSave()
+        {
+            string fileLocation = currentSaveGameLocation + @"\save\autosave\game.sii";
+            string moneyString = GetSavedValue(fileLocation, " money_account: ");
+            int money = 0;
+            int.TryParse(moneyString, out money);
+            return money;
         }
         
         private void DecryptSii(string dir)
@@ -84,77 +83,11 @@ namespace Version_1
                 }
             }
         }
-
         
-
-
-
-
-
-
-
-
-
-        //private string ProfileLocator()
-        //{
-        //    if (File.Exists(Directory.GetCurrentDirectory() + "config.cfg"))
-        //    {
-        //        StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "config.cfg");
-        //        string profilesLocation = sr.ReadLine().Split('"')[1];
-        //        if (Directory.Exists(profilesLocation))
-        //        {
-        //            return profilesLocation;
-        //        }
-        //        else
-        //        {
-        //            return ProfileSelector();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return ProfileSelector();
-        //    }
-        //}
-
-        //private string ProfileSelector()
-        //{
-        //    bool profilesFolderIsCorrect = false;
-        //    FolderBrowserDialog fb = new FolderBrowserDialog();
-        //    fb.Description = "Select the ETS2/ATS Profiles Folder";
-        //    do
-        //    {
-        //        fb.ShowDialog();
-        //        foreach (string dir in Directory.GetDirectories(fb.SelectedPath))
-        //        {
-        //            if(File.Exists(dir + @"\profile.sii"))
-        //            {
-        //                profilesFolderIsCorrect = true;
-        //            }
-        //        }
-        //        if (!profilesFolderIsCorrect)
-        //        {
-        //            MessageBox.Show(new Form { TopMost = true }, "Wrong Path Selected!\nSelect The Path To The Profiles Folder", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-
-        //    }
-        //    while (!profilesFolderIsCorrect);
-        //    StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + "config.cfg", false);
-        //    sw.WriteLine($"SavegameLocation=\"{fb.SelectedPath}\"");
-        //    sw.Close();
-        //    return fb.SelectedPath;
-        //}
-
-        private void SaveGameLocator()
+        public List<object> GetProfiles()
         {
-            savegameSelectorForm = new Form();
-            savegames = new ListBox();
-            savegames.Width = savegameSelectorForm.Width;
-            savegames.Height = savegameSelectorForm.Height;
-            savegames.MouseDoubleClick += loadProfile;
-            savegameSelectorForm.Controls.Add(savegames);
-            savegameSelectorForm.Show();
-
-            foreach(string dir in Directory.GetDirectories(profilesLocation))
+            List<object> profiles = new List<object>();
+            foreach (string dir in Directory.GetDirectories(profilesLocation))
             {
                 DecryptSii(dir + @"\profile.sii");
                 StreamReader sr = new StreamReader(dir + @"\profile.sii");
@@ -164,20 +97,19 @@ namespace Version_1
                     if (line.Contains(" profile_name: "))
                     {
                         line = line.Replace(" profile_name: ", "");
-                        savegames.Items.Add(line);
+                        profiles.Add(line);
                     }
                 }
             }
+            return profiles;
         }
 
-        private void loadProfile(object sender, MouseEventArgs e)
+        public void LoadProfile(string profileName)
         {
             foreach (string dir in Directory.GetDirectories(profilesLocation))
             {
                 if (currentSaveGameLocation != "")
                 {
-                    tracker.Show();
-                    savegameSelectorForm.Close();
                     LoadProfileData(null, null);
                     loadInterval = new Timer();
                     loadInterval.Interval = 30000;
@@ -194,7 +126,7 @@ namespace Version_1
                     if (line.Contains(" profile_name: "))
                     {
                         line = line.Replace(" profile_name: ", "");
-                        if(savegames.SelectedItem.ToString() == line)
+                        if(line == profileName)
                         {
                             currentSaveGameLocation = dir;
                             break;
@@ -212,6 +144,11 @@ namespace Version_1
         public int GetPlayerMoney()
         {
             return playerMoney;
+        }
+
+        public int GetPlayerEXP()
+        {
+            return playerEXP;
         }
     }
 }
