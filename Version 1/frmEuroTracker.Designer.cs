@@ -30,6 +30,8 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDamagePercentage = new System.Windows.Forms.Label();
+            this.imgDamage = new System.Windows.Forms.PictureBox();
             this.lblEXP = new System.Windows.Forms.Label();
             this.lblMoney = new System.Windows.Forms.Label();
             this.lblDistance = new System.Windows.Forms.Label();
@@ -38,8 +40,7 @@
             this.lblCargo = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.lblFuel = new System.Windows.Forms.Label();
-            this.imgDamage = new System.Windows.Forms.PictureBox();
-            this.lblDamagePercentage = new System.Windows.Forms.Label();
+            this.lblDamageTitle = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).BeginInit();
             this.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblDamageTitle);
             this.panel1.Controls.Add(this.lblDamagePercentage);
             this.panel1.Controls.Add(this.imgDamage);
             this.panel1.Controls.Add(this.lblEXP);
@@ -70,6 +72,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(734, 424);
             this.panel1.TabIndex = 1;
+            // 
+            // lblDamagePercentage
+            // 
+            this.lblDamagePercentage.AutoSize = true;
+            this.lblDamagePercentage.Location = new System.Drawing.Point(538, 248);
+            this.lblDamagePercentage.Name = "lblDamagePercentage";
+            this.lblDamagePercentage.Size = new System.Drawing.Size(52, 19);
+            this.lblDamagePercentage.TabIndex = 13;
+            this.lblDamagePercentage.Text = "100%";
+            // 
+            // imgDamage
+            // 
+            this.imgDamage.BackColor = System.Drawing.Color.White;
+            this.imgDamage.Location = new System.Drawing.Point(543, 45);
+            this.imgDamage.Name = "imgDamage";
+            this.imgDamage.Size = new System.Drawing.Size(41, 200);
+            this.imgDamage.TabIndex = 12;
+            this.imgDamage.TabStop = false;
             // 
             // lblEXP
             // 
@@ -143,23 +163,14 @@
             this.lblFuel.TabIndex = 0;
             this.lblFuel.Text = "Fuel:";
             // 
-            // imgDamage
+            // lblDamageTitle
             // 
-            this.imgDamage.BackColor = System.Drawing.Color.White;
-            this.imgDamage.Location = new System.Drawing.Point(543, 45);
-            this.imgDamage.Name = "imgDamage";
-            this.imgDamage.Size = new System.Drawing.Size(41, 209);
-            this.imgDamage.TabIndex = 12;
-            this.imgDamage.TabStop = false;
-            // 
-            // lblDamagePercentage
-            // 
-            this.lblDamagePercentage.AutoSize = true;
-            this.lblDamagePercentage.Location = new System.Drawing.Point(538, 257);
-            this.lblDamagePercentage.Name = "lblDamagePercentage";
-            this.lblDamagePercentage.Size = new System.Drawing.Size(52, 19);
-            this.lblDamagePercentage.TabIndex = 13;
-            this.lblDamagePercentage.Text = "100%";
+            this.lblDamageTitle.AutoSize = true;
+            this.lblDamageTitle.Location = new System.Drawing.Point(499, 23);
+            this.lblDamageTitle.Name = "lblDamageTitle";
+            this.lblDamageTitle.Size = new System.Drawing.Size(131, 19);
+            this.lblDamageTitle.TabIndex = 14;
+            this.lblDamageTitle.Text = "Chassis Damage";
             // 
             // frmEuroTracker
             // 
@@ -195,6 +206,7 @@
         private System.Windows.Forms.Label lblEXP;
         private System.Windows.Forms.PictureBox imgDamage;
         private System.Windows.Forms.Label lblDamagePercentage;
+        private System.Windows.Forms.Label lblDamageTitle;
     }
 }
 

@@ -15,6 +15,7 @@ namespace Version_1
         SavegameReader save;
         frmProfileSelector mainThread;
         DatabaseHandler dbHandler;
+        int lastDamage;
         //bool runned = false;
 
         public frmEuroTracker(frmProfileSelector profiles)
@@ -30,6 +31,8 @@ namespace Version_1
             client.Data += UpdateData;
             client.JobFinished += TelemetryOnJobFinished;
             client.JobStarted += TelemetryOnJobStarted;
+
+            
 
             //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
         }
@@ -56,7 +59,7 @@ namespace Version_1
                         this.Invoke(new TelemetryData(UpdateData), new object[2] { data, updated });
                         return;
                     }
-
+                    DamageLegend();
 
                     lblFuel.Text = $"Fuel: {Math.Round(data.Drivetrain.Fuel)}/{Math.Round(data.Drivetrain.FuelMax)}";
                     lblPosition.Text = $"Position: {data.Physics.CoordinateX}, {data.Physics.CoordinateY}, {data.Physics.CoordinateZ}";
@@ -87,16 +90,39 @@ namespace Version_1
             int chassisDamagePercentage = Convert.ToInt32(data.Damage.WearChassis * 100);
             int currentDamage = chassisDamagePercentage * stepHeight;
 
+            lastDamage = currentDamage;
+
             if (chassisDamagePercentage < 10)
-                lblDamagePercentage.Location = new Point(546, 257);
+                lblDamagePercentage.Location = new Point(546, lblDamagePercentage.Location.Y);
             else if (chassisDamagePercentage < 100)
-                lblDamagePercentage.Location = new Point(542, 257);
+                lblDamagePercentage.Location = new Point(542, lblDamagePercentage.Location.Y);
             else if (chassisDamagePercentage == 100)
-                lblDamagePercentage.Location = new Point(538, 257);
+                lblDamagePercentage.Location = new Point(538, lblDamagePercentage.Location.Y);
 
             lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
-            
-            g.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
+
+            if(lastDamage != currentDamage)
+            {
+                g.Clear(Color.White);
+                g.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
+            }
+            g.Dispose();
+            brush.Dispose();
+        }
+
+        private void DamageLegend()
+        {
+            Graphics g = imgDamage.CreateGraphics();
+            SolidBrush brush = new SolidBrush(Color.Black);
+            Pen p = new Pen(Color.Black, 1);
+
+            int tenPercent = imgDamage.Height / 10;
+
+            g.DrawRectangle(p, new Rectangle(0, 0, imgDamage.Width-1, imgDamage.Height-1));
+            for (int i = 0; i < 10; i++)
+            {
+                g.FillRectangle(brush, new Rectangle(0, tenPercent * i, imgDamage.Width, 1));
+            }
             g.Dispose();
             brush.Dispose();
         }
