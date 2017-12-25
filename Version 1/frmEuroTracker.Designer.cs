@@ -28,19 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEuroTracker));
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMoney = new System.Windows.Forms.Label();
             this.lblDistance = new System.Windows.Forms.Label();
             this.lblTarget = new System.Windows.Forms.Label();
             this.lblTruck = new System.Windows.Forms.Label();
             this.lblCargo = new System.Windows.Forms.Label();
-            this.imgDamage = new System.Windows.Forms.PictureBox();
             this.lblPosition = new System.Windows.Forms.Label();
             this.lblFuel = new System.Windows.Forms.Label();
-            this.lblMoney = new System.Windows.Forms.Label();
+            this.lblEXP = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -55,18 +53,27 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblEXP);
             this.panel1.Controls.Add(this.lblMoney);
             this.panel1.Controls.Add(this.lblDistance);
             this.panel1.Controls.Add(this.lblTarget);
             this.panel1.Controls.Add(this.lblTruck);
             this.panel1.Controls.Add(this.lblCargo);
-            this.panel1.Controls.Add(this.imgDamage);
             this.panel1.Controls.Add(this.lblPosition);
             this.panel1.Controls.Add(this.lblFuel);
             this.panel1.Location = new System.Drawing.Point(-1, 47);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(734, 424);
             this.panel1.TabIndex = 1;
+            // 
+            // lblMoney
+            // 
+            this.lblMoney.AutoSize = true;
+            this.lblMoney.Location = new System.Drawing.Point(3, 74);
+            this.lblMoney.Name = "lblMoney";
+            this.lblMoney.Size = new System.Drawing.Size(64, 19);
+            this.lblMoney.TabIndex = 10;
+            this.lblMoney.Text = "Money:";
             // 
             // lblDistance
             // 
@@ -104,17 +111,6 @@
             this.lblCargo.TabIndex = 3;
             this.lblCargo.Text = "Cargo:";
             // 
-            // imgDamage
-            // 
-            this.imgDamage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.imgDamage.Image = ((System.Drawing.Image)(resources.GetObject("imgDamage.Image")));
-            this.imgDamage.Location = new System.Drawing.Point(392, 13);
-            this.imgDamage.Name = "imgDamage";
-            this.imgDamage.Size = new System.Drawing.Size(44, 166);
-            this.imgDamage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgDamage.TabIndex = 2;
-            this.imgDamage.TabStop = false;
-            // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
@@ -133,14 +129,14 @@
             this.lblFuel.TabIndex = 0;
             this.lblFuel.Text = "Fuel:";
             // 
-            // lblMoney
+            // lblEXP
             // 
-            this.lblMoney.AutoSize = true;
-            this.lblMoney.Location = new System.Drawing.Point(3, 81);
-            this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(64, 19);
-            this.lblMoney.TabIndex = 10;
-            this.lblMoney.Text = "Money:";
+            this.lblEXP.AutoSize = true;
+            this.lblEXP.Location = new System.Drawing.Point(3, 102);
+            this.lblEXP.Name = "lblEXP";
+            this.lblEXP.Size = new System.Drawing.Size(98, 19);
+            this.lblEXP.TabIndex = 11;
+            this.lblEXP.Text = "Experience:";
             // 
             // frmEuroTracker
             // 
@@ -153,10 +149,9 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmEuroTracker";
             this.Text = "EuroTracker";
-            this.Shown += new System.EventHandler(this.frmEuroTracker_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,12 +163,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblFuel;
         private System.Windows.Forms.Label lblPosition;
-        private System.Windows.Forms.PictureBox imgDamage;
         private System.Windows.Forms.Label lblCargo;
         private System.Windows.Forms.Label lblTarget;
         private System.Windows.Forms.Label lblTruck;
         private System.Windows.Forms.Label lblDistance;
         private System.Windows.Forms.Label lblMoney;
+        private System.Windows.Forms.Label lblEXP;
     }
 }
 
