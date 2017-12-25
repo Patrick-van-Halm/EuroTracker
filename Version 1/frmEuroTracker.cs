@@ -15,6 +15,7 @@ namespace Version_1
         SavegameReader save;
         frmProfileSelector mainThread;
         DatabaseHandler dbHandler;
+        //bool runned = false;
 
         public frmEuroTracker(frmProfileSelector profiles)
         {
@@ -30,7 +31,7 @@ namespace Version_1
             client.JobFinished += TelemetryOnJobFinished;
             client.JobStarted += TelemetryOnJobStarted;
 
-            dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
+            //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
@@ -66,7 +67,12 @@ namespace Version_1
                     lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
                     lblEXP.Text = $"Experience: {save.GetPlayerEXP()}";
 
-                    //UpdateDamage(data);
+                    UpdateDamage(data);
+                    //if (!runned)
+                    //{
+                    //    dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
+                    //    runned = true;
+                    //}
                 }
 
             }
