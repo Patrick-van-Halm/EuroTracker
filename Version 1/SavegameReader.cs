@@ -20,7 +20,13 @@ namespace Tools
 
         public SavegameReader()
         {
-            profilesLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Euro Truck Simulator 2\profiles\";
+            string etsLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Euro Truck Simulator 2\";
+            profilesLocation = etsLocation + @"profiles\";
+            string modsLocation = etsLocation + @"mod\";
+            if(!File.Exists(modsLocation + "autosave.scs"))
+            {
+                File.Copy("autosave.scs", modsLocation + "autosave.scs");
+            }
         }
 
         private void LoadProfileData(object sender, EventArgs e)
@@ -89,17 +95,21 @@ namespace Tools
             List<object> profiles = new List<object>();
             foreach (string dir in Directory.GetDirectories(profilesLocation))
             {
-                DecryptSii(dir + @"\profile.sii");
-                StreamReader sr = new StreamReader(dir + @"\profile.sii");
-                while (!sr.EndOfStream)
+                if(File.Exists(dir + @"\profile.sii"))
                 {
-                    string line = sr.ReadLine();
-                    if (line.Contains(" profile_name: "))
+                    DecryptSii(dir + @"\profile.sii");
+                    StreamReader sr = new StreamReader(dir + @"\profile.sii");
+                    while (!sr.EndOfStream)
                     {
-                        line = line.Replace(" profile_name: ", "");
-                        profiles.Add(line);
+                        string line = sr.ReadLine();
+                        if (line.Contains(" profile_name: "))
+                        {
+                            line = line.Replace(" profile_name: ", "");
+                            profiles.Add(line);
+                        }
                     }
                 }
+                
             }
             return profiles;
         }
@@ -112,7 +122,7 @@ namespace Tools
                 {
                     LoadProfileData(null, null);
                     loadInterval = new Timer();
-                    loadInterval.Interval = 30000;
+                    loadInterval.Interval = 10000;
                     loadInterval.Enabled = true;
                     loadInterval.Tick += LoadProfileData;
                     break;

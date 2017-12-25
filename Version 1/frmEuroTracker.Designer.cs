@@ -30,6 +30,7 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblEXP = new System.Windows.Forms.Label();
             this.lblMoney = new System.Windows.Forms.Label();
             this.lblDistance = new System.Windows.Forms.Label();
             this.lblTarget = new System.Windows.Forms.Label();
@@ -37,8 +38,10 @@
             this.lblCargo = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.lblFuel = new System.Windows.Forms.Label();
-            this.lblEXP = new System.Windows.Forms.Label();
+            this.imgDamage = new System.Windows.Forms.PictureBox();
+            this.lblDamagePercentage = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -53,6 +56,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblDamagePercentage);
+            this.panel1.Controls.Add(this.imgDamage);
             this.panel1.Controls.Add(this.lblEXP);
             this.panel1.Controls.Add(this.lblMoney);
             this.panel1.Controls.Add(this.lblDistance);
@@ -65,6 +70,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(734, 424);
             this.panel1.TabIndex = 1;
+            // 
+            // lblEXP
+            // 
+            this.lblEXP.AutoSize = true;
+            this.lblEXP.Location = new System.Drawing.Point(3, 102);
+            this.lblEXP.Name = "lblEXP";
+            this.lblEXP.Size = new System.Drawing.Size(98, 19);
+            this.lblEXP.TabIndex = 11;
+            this.lblEXP.Text = "Experience:";
             // 
             // lblMoney
             // 
@@ -129,14 +143,23 @@
             this.lblFuel.TabIndex = 0;
             this.lblFuel.Text = "Fuel:";
             // 
-            // lblEXP
+            // imgDamage
             // 
-            this.lblEXP.AutoSize = true;
-            this.lblEXP.Location = new System.Drawing.Point(3, 102);
-            this.lblEXP.Name = "lblEXP";
-            this.lblEXP.Size = new System.Drawing.Size(98, 19);
-            this.lblEXP.TabIndex = 11;
-            this.lblEXP.Text = "Experience:";
+            this.imgDamage.BackColor = System.Drawing.Color.White;
+            this.imgDamage.Location = new System.Drawing.Point(543, 45);
+            this.imgDamage.Name = "imgDamage";
+            this.imgDamage.Size = new System.Drawing.Size(41, 209);
+            this.imgDamage.TabIndex = 12;
+            this.imgDamage.TabStop = false;
+            // 
+            // lblDamagePercentage
+            // 
+            this.lblDamagePercentage.AutoSize = true;
+            this.lblDamagePercentage.Location = new System.Drawing.Point(538, 257);
+            this.lblDamagePercentage.Name = "lblDamagePercentage";
+            this.lblDamagePercentage.Size = new System.Drawing.Size(52, 19);
+            this.lblDamagePercentage.TabIndex = 13;
+            this.lblDamagePercentage.Text = "100%";
             // 
             // frmEuroTracker
             // 
@@ -152,6 +175,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +193,8 @@
         private System.Windows.Forms.Label lblDistance;
         private System.Windows.Forms.Label lblMoney;
         private System.Windows.Forms.Label lblEXP;
+        private System.Windows.Forms.PictureBox imgDamage;
+        private System.Windows.Forms.Label lblDamagePercentage;
     }
 }
 

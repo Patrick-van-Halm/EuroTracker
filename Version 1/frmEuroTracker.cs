@@ -31,11 +31,27 @@ namespace Version_1
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler(TelemetryOnJobFinished));
+                return;
+            }
+            Graphics g = imgDamage.CreateGraphics();
+            g.Clear(Color.White);
+            g.Dispose();
+            
             //MessageBox.Show("Job finished, or at least unloaded nearby cargo destination.");
         }
 
         private void TelemetryOnJobStarted(object sender, EventArgs e)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new EventHandler(TelemetryOnJobStarted));
+                return;
+            }
+            lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
+            lblEXP.Text = $"Experience: {save.GetPlayerEXP()}";
             //MessageBox.Show("Just started job OR loaded game with active.");
         }
 
@@ -61,8 +77,33 @@ namespace Version_1
                 lblDistance.Text = $"Distance: {Math.Round(data.Job.NavigationDistanceLeft / 1000, 1)} KM";
                 lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
                 lblEXP.Text = $"Experience: {save.GetPlayerEXP()}";
+
+                UpdateDamage(data);
+
             }
             catch { }
+        }
+
+        private void UpdateDamage(Ets2Telemetry data)
+        {
+            Graphics g = imgDamage.CreateGraphics();
+            SolidBrush brush = new SolidBrush(Color.Red);
+            int stepHeight = imgDamage.Height / 100;
+            int chassisDamagePercentage = Convert.ToInt32(data.Damage.WearChassis * 100);
+            int currentDamage = chassisDamagePercentage * stepHeight;
+
+            if (chassisDamagePercentage < 10)
+                lblDamagePercentage.Location = new Point(546, 257);
+            else if (chassisDamagePercentage < 100)
+                lblDamagePercentage.Location = new Point(542, 257);
+            else if (chassisDamagePercentage == 100)
+                lblDamagePercentage.Location = new Point(538, 257);
+
+            lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
+            
+            g.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
+            g.Dispose();
+            brush.Dispose();
         }
 
         private void FrmEuroTracker_FormClosing(object sender, FormClosingEventArgs e)
