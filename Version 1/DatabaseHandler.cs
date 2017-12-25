@@ -13,14 +13,14 @@ namespace Tools
         private MySqlConnection connection;
 
         //Constructor
-        public void Connect()
+        public DatabaseHandler()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["database"].ToString();
             connection = new MySqlConnection(connectionString);
         }
 
         //open connection to database
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
