@@ -40,6 +40,8 @@ namespace Version_1
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
         {
+            string from = save.GetDeliveryVariable(1).Split('.')[save.GetDeliveryVariable(1).Split('.').Length - 1];
+            from = CapitalizeString(from);
             //MessageBox.Show("Job finished, or at least unloaded nearby cargo destination.");
         }
 
@@ -86,8 +88,8 @@ namespace Version_1
         {
             
             int stepHeight = imgDamage.Height / 100;
-            //int chassisDamagePercentage = Convert.ToInt32(data.Damage.WearChassis * 100);
-            int chassisDamagePercentage = 60;
+            int chassisDamagePercentage = Convert.ToInt32(data.Damage.WearChassis * 100);
+            //int chassisDamagePercentage = 60;
             int currentDamage = chassisDamagePercentage * stepHeight;
 
 
@@ -109,10 +111,11 @@ namespace Version_1
             else if (chassisDamagePercentage == 100)
                 lblDamagePercentage.Location = new Point(538, lblDamagePercentage.Location.Y);
 
-            
-            if(currentDamage != lastDamage)
+            lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
+
+            if (currentDamage != lastDamage)
             {
-                lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
+                
                 gDamage.Clear(Color.White);
                 gDamage.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
                 lastDamage = currentDamage;
@@ -139,6 +142,16 @@ namespace Version_1
         private void FrmEuroTracker_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainThread.Close();
+        }
+        public string CapitalizeString(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
         }
     }
 }

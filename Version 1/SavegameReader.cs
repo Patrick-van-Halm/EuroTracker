@@ -35,6 +35,64 @@ namespace Tools
             playerMoney = GetMoneyFromSave();
         }
 
+        public string GetDeliveryVariable(int paramKey)
+        {
+            string jobId = GetLastJob();
+            if (File.Exists(currentSaveGameLocation + @"\save\autosave\game.sii"))
+            {
+                DecryptSii(currentSaveGameLocation + @"\save\autosave\game.sii");
+                StreamReader sr = new StreamReader(currentSaveGameLocation + @"\save\autosave\game.sii");
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if(line.Contains($"delivery_log_entry : {jobId}"))
+                    {
+                        sr.ReadLine();
+                        while(line != "}")
+                        {
+                            line = sr.ReadLine();
+                            if (line.Contains($" params[{paramKey}]:"))
+                            {
+                                line = line.Replace($" params[{paramKey}]: ", "");
+                                line = line.Replace("\"", "");
+                                return line;
+                            }
+                        }
+                    }
+                }
+            }
+            return "";
+        }
+
+        private string GetLastJob()
+        {
+            if (File.Exists(currentSaveGameLocation + @"\save\autosave\game.sii"))
+            {
+                DecryptSii(currentSaveGameLocation + @"\save\autosave\game.sii");
+                StreamReader sr = new StreamReader(currentSaveGameLocation + @"\save\autosave\game.sii");
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if(line.Contains("delivery_log : "))
+                    {
+                        int jobsLength = 0;
+                        sr.ReadLine();
+                        line = sr.ReadLine();
+                        line = line.Replace(" entries: ", "");
+                        int.TryParse(line, out jobsLength);
+                        int i = 0;
+                        for (; i < jobsLength; i++)
+                        {
+                            line = sr.ReadLine();
+                        }
+                        line = line.Replace($" entries[{i - 1}]: ", "");
+                        return line;
+                    }
+                }
+            }
+            return "";
+        }
+
         private string GetSavedValue(string location, string key)
         {
             if (File.Exists(location))
