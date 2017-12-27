@@ -111,11 +111,11 @@ namespace Version_1
             else if (chassisDamagePercentage == 100)
                 lblDamagePercentage.Location = new Point(538, lblDamagePercentage.Location.Y);
 
-            lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
+            
 
             if (currentDamage != lastDamage)
             {
-                
+                lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
                 gDamage.Clear(Color.White);
                 gDamage.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
                 lastDamage = currentDamage;

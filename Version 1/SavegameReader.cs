@@ -22,11 +22,6 @@ namespace Tools
         {
             string etsLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Euro Truck Simulator 2\";
             profilesLocation = etsLocation + @"profiles\";
-            string modsLocation = etsLocation + @"mod\";
-            if(!File.Exists(modsLocation + "autosave.scs"))
-            {
-                File.Copy("autosave.scs", modsLocation + "autosave.scs");
-            }
         }
 
         private void LoadProfileData(object sender, EventArgs e)
