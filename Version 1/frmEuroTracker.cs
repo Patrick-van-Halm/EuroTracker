@@ -12,6 +12,7 @@ namespace Version_1
     {
 
         Ets2SdkTelemetry client;
+        ProfileReader profile;
         SavegameReader save;
         frmProfileSelector mainThread;
         DatabaseHandler dbHandler;
@@ -22,11 +23,12 @@ namespace Version_1
         public frmEuroTracker(frmProfileSelector profiles)
         {
             mainThread = profiles;
-            save = profiles.GetSavegameReader();
+            profile = profiles.GetProfileReader();
             InitializeComponent();
 
             dbHandler = new DatabaseHandler();
             client = new Ets2SdkTelemetry();
+            save = new SavegameReader(profile.GetAutosaveLocation());
             
             //Setup Syncing Voids
             client.Data += UpdateData;
@@ -40,8 +42,6 @@ namespace Version_1
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
         {
-            string from = save.GetDeliveryVariable(1).Split('.')[save.GetDeliveryVariable(1).Split('.').Length - 1];
-            from = CapitalizeString(from);
             //MessageBox.Show("Job finished, or at least unloaded nearby cargo destination.");
         }
 
@@ -142,16 +142,6 @@ namespace Version_1
         private void FrmEuroTracker_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainThread.Close();
-        }
-        public string CapitalizeString(string str)
-        {
-            if (str == null)
-                return null;
-
-            if (str.Length > 1)
-                return char.ToUpper(str[0]) + str.Substring(1);
-
-            return str.ToUpper();
         }
     }
 }

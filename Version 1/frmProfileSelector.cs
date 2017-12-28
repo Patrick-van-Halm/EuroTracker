@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tools;
 
@@ -13,7 +7,7 @@ namespace Version_1
 {
     public partial class frmProfileSelector : Form
     {
-        SavegameReader saves = new SavegameReader();
+        ProfileReader profile = new ProfileReader();
         public frmProfileSelector()
         {
             InitializeComponent();
@@ -21,18 +15,18 @@ namespace Version_1
 
         private void FrmProfileSelector_Load(object sender, EventArgs e)
         {
-            listboxProfiles.Items.AddRange(saves.GetProfiles().ToArray());
+            listboxProfiles.Items.AddRange(profile.GetProfiles().ToArray());
         }
 
-        public SavegameReader GetSavegameReader()
+        public ProfileReader GetProfileReader()
         {
-            return saves;
+            return profile;
         }
 
         private void ListboxProfiles_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            saves.LoadProfile(listboxProfiles.SelectedItem.ToString());
-            if(saves.GetSaveLocation() != "")
+            profile.LoadProfile(listboxProfiles.SelectedItem.ToString());
+            if(profile.GetProfileLocation() != "")
             {
                 frmEuroTracker tracker = new frmEuroTracker(this);
                 tracker.Show();

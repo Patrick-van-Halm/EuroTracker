@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHandler.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="frmEuroTracker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +70,7 @@
     <Compile Include="frmProfileSelector.Designer.cs">
       <DependentUpon>frmProfileSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SavegameReader.cs" />
