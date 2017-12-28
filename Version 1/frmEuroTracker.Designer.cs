@@ -30,6 +30,7 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDamageTitle = new System.Windows.Forms.Label();
             this.lblDamagePercentage = new System.Windows.Forms.Label();
             this.imgDamage = new System.Windows.Forms.PictureBox();
             this.lblEXP = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.lblCargo = new System.Windows.Forms.Label();
             this.lblPosition = new System.Windows.Forms.Label();
             this.lblFuel = new System.Windows.Forms.Label();
-            this.lblDamageTitle = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).BeginInit();
             this.SuspendLayout();
@@ -73,14 +73,23 @@
             this.panel1.Size = new System.Drawing.Size(734, 424);
             this.panel1.TabIndex = 1;
             // 
+            // lblDamageTitle
+            // 
+            this.lblDamageTitle.AutoSize = true;
+            this.lblDamageTitle.Location = new System.Drawing.Point(499, 23);
+            this.lblDamageTitle.Name = "lblDamageTitle";
+            this.lblDamageTitle.Size = new System.Drawing.Size(131, 19);
+            this.lblDamageTitle.TabIndex = 14;
+            this.lblDamageTitle.Text = "Chassis Damage";
+            // 
             // lblDamagePercentage
             // 
             this.lblDamagePercentage.AutoSize = true;
             this.lblDamagePercentage.Location = new System.Drawing.Point(538, 248);
             this.lblDamagePercentage.Name = "lblDamagePercentage";
-            this.lblDamagePercentage.Size = new System.Drawing.Size(52, 19);
+            this.lblDamagePercentage.Size = new System.Drawing.Size(34, 19);
             this.lblDamagePercentage.TabIndex = 13;
-            this.lblDamagePercentage.Text = "100%";
+            this.lblDamagePercentage.Text = "0%";
             // 
             // imgDamage
             // 
@@ -162,15 +171,6 @@
             this.lblFuel.Size = new System.Drawing.Size(45, 19);
             this.lblFuel.TabIndex = 0;
             this.lblFuel.Text = "Fuel:";
-            // 
-            // lblDamageTitle
-            // 
-            this.lblDamageTitle.AutoSize = true;
-            this.lblDamageTitle.Location = new System.Drawing.Point(499, 23);
-            this.lblDamageTitle.Name = "lblDamageTitle";
-            this.lblDamageTitle.Size = new System.Drawing.Size(131, 19);
-            this.lblDamageTitle.TabIndex = 14;
-            this.lblDamageTitle.Text = "Chassis Damage";
             // 
             // frmEuroTracker
             // 
