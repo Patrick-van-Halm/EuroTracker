@@ -47,7 +47,9 @@ namespace Version_1
 
         private void TelemetryOnJobStarted(object sender, EventArgs e)
         {
-            
+            //Check of JobExist && JobHasBeanEnded(Cargo, CityDestination, CitySource, CompanyDestination, CompanySource,  Mass, Trailer Id)
+            //if false && false
+            //AddJob to database(Cargo, CityDestination, CitySource, CompanyDestination, CompanySource)
         }
 
         private void UpdateData(Ets2Telemetry data, bool updated)
