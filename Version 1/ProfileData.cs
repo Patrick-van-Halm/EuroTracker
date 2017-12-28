@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tools
 {
-    class ProfileData : Data
+    public class ProfileData : Data
     {
         protected int playerEXP;
         

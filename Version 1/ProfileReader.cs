@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tools
 {
-    class ProfileReader : ProfileData
+    public class ProfileReader : ProfileData
     {
         private string profilesLocation;
 
