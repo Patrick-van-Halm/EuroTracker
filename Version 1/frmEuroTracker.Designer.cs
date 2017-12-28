@@ -29,20 +29,32 @@
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblDamageTitle = new System.Windows.Forms.Label();
-            this.lblDamagePercentage = new System.Windows.Forms.Label();
-            this.imgDamage = new System.Windows.Forms.PictureBox();
-            this.lblEXP = new System.Windows.Forms.Label();
-            this.lblMoney = new System.Windows.Forms.Label();
-            this.lblDistance = new System.Windows.Forms.Label();
-            this.lblTarget = new System.Windows.Forms.Label();
-            this.lblTruck = new System.Windows.Forms.Label();
-            this.lblCargo = new System.Windows.Forms.Label();
-            this.lblPosition = new System.Windows.Forms.Label();
-            this.lblFuel = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).BeginInit();
+            this.tabsTracker = new System.Windows.Forms.TabControl();
+            this.tabDamage = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblChassisDamageTitle = new System.Windows.Forms.Label();
+            this.lblChassisDamage = new System.Windows.Forms.Label();
+            this.imgChassisDamage = new System.Windows.Forms.PictureBox();
+            this.lblEngineDamageTitle = new System.Windows.Forms.Label();
+            this.lblEngineDamage = new System.Windows.Forms.Label();
+            this.imgEngineDamage = new System.Windows.Forms.PictureBox();
+            this.txtFrom = new System.Windows.Forms.TextBox();
+            this.txtTo = new System.Windows.Forms.TextBox();
+            this.txtCargo = new System.Windows.Forms.TextBox();
+            this.numDistance = new System.Windows.Forms.NumericUpDown();
+            this.txtTruck = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnAddJob = new System.Windows.Forms.Button();
+            this.tabsTracker.SuspendLayout();
+            this.tabDamage.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgChassisDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgEngineDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDistance)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -55,138 +67,222 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Euro Tracker";
             // 
-            // panel1
+            // tabsTracker
             // 
-            this.panel1.Controls.Add(this.lblDamageTitle);
-            this.panel1.Controls.Add(this.lblDamagePercentage);
-            this.panel1.Controls.Add(this.imgDamage);
-            this.panel1.Controls.Add(this.lblEXP);
-            this.panel1.Controls.Add(this.lblMoney);
-            this.panel1.Controls.Add(this.lblDistance);
-            this.panel1.Controls.Add(this.lblTarget);
-            this.panel1.Controls.Add(this.lblTruck);
-            this.panel1.Controls.Add(this.lblCargo);
-            this.panel1.Controls.Add(this.lblPosition);
-            this.panel1.Controls.Add(this.lblFuel);
-            this.panel1.Location = new System.Drawing.Point(-1, 47);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(734, 424);
-            this.panel1.TabIndex = 1;
+            this.tabsTracker.Controls.Add(this.tabDamage);
+            this.tabsTracker.Controls.Add(this.tabPage2);
+            this.tabsTracker.Location = new System.Drawing.Point(0, 48);
+            this.tabsTracker.Name = "tabsTracker";
+            this.tabsTracker.SelectedIndex = 0;
+            this.tabsTracker.Size = new System.Drawing.Size(728, 420);
+            this.tabsTracker.TabIndex = 2;
             // 
-            // lblDamageTitle
+            // tabDamage
             // 
-            this.lblDamageTitle.AutoSize = true;
-            this.lblDamageTitle.Location = new System.Drawing.Point(499, 23);
-            this.lblDamageTitle.Name = "lblDamageTitle";
-            this.lblDamageTitle.Size = new System.Drawing.Size(131, 19);
-            this.lblDamageTitle.TabIndex = 14;
-            this.lblDamageTitle.Text = "Chassis Damage";
+            this.tabDamage.Controls.Add(this.lblEngineDamageTitle);
+            this.tabDamage.Controls.Add(this.lblEngineDamage);
+            this.tabDamage.Controls.Add(this.imgEngineDamage);
+            this.tabDamage.Controls.Add(this.lblChassisDamageTitle);
+            this.tabDamage.Controls.Add(this.lblChassisDamage);
+            this.tabDamage.Controls.Add(this.imgChassisDamage);
+            this.tabDamage.Location = new System.Drawing.Point(4, 28);
+            this.tabDamage.Name = "tabDamage";
+            this.tabDamage.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDamage.Size = new System.Drawing.Size(720, 388);
+            this.tabDamage.TabIndex = 0;
+            this.tabDamage.Text = "Damage";
+            this.tabDamage.UseVisualStyleBackColor = true;
             // 
-            // lblDamagePercentage
+            // tabPage2
             // 
-            this.lblDamagePercentage.AutoSize = true;
-            this.lblDamagePercentage.Location = new System.Drawing.Point(538, 248);
-            this.lblDamagePercentage.Name = "lblDamagePercentage";
-            this.lblDamagePercentage.Size = new System.Drawing.Size(34, 19);
-            this.lblDamagePercentage.TabIndex = 13;
-            this.lblDamagePercentage.Text = "0%";
+            this.tabPage2.Controls.Add(this.btnAddJob);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.txtTruck);
+            this.tabPage2.Controls.Add(this.numDistance);
+            this.tabPage2.Controls.Add(this.txtCargo);
+            this.tabPage2.Controls.Add(this.txtTo);
+            this.tabPage2.Controls.Add(this.txtFrom);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(720, 388);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Add Job";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // imgDamage
+            // lblChassisDamageTitle
             // 
-            this.imgDamage.BackColor = System.Drawing.Color.White;
-            this.imgDamage.Location = new System.Drawing.Point(543, 45);
-            this.imgDamage.Name = "imgDamage";
-            this.imgDamage.Size = new System.Drawing.Size(41, 200);
-            this.imgDamage.TabIndex = 12;
-            this.imgDamage.TabStop = false;
+            this.lblChassisDamageTitle.AutoSize = true;
+            this.lblChassisDamageTitle.Location = new System.Drawing.Point(4, 4);
+            this.lblChassisDamageTitle.Name = "lblChassisDamageTitle";
+            this.lblChassisDamageTitle.Size = new System.Drawing.Size(131, 19);
+            this.lblChassisDamageTitle.TabIndex = 17;
+            this.lblChassisDamageTitle.Text = "Chassis Damage";
             // 
-            // lblEXP
+            // lblChassisDamage
             // 
-            this.lblEXP.AutoSize = true;
-            this.lblEXP.Location = new System.Drawing.Point(3, 102);
-            this.lblEXP.Name = "lblEXP";
-            this.lblEXP.Size = new System.Drawing.Size(98, 19);
-            this.lblEXP.TabIndex = 11;
-            this.lblEXP.Text = "Experience:";
+            this.lblChassisDamage.AutoSize = true;
+            this.lblChassisDamage.Location = new System.Drawing.Point(49, 361);
+            this.lblChassisDamage.Name = "lblChassisDamage";
+            this.lblChassisDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblChassisDamage.TabIndex = 16;
+            this.lblChassisDamage.Text = "0%";
             // 
-            // lblMoney
+            // imgChassisDamage
             // 
-            this.lblMoney.AutoSize = true;
-            this.lblMoney.Location = new System.Drawing.Point(3, 74);
-            this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(64, 19);
-            this.lblMoney.TabIndex = 10;
-            this.lblMoney.Text = "Money:";
+            this.imgChassisDamage.BackColor = System.Drawing.Color.White;
+            this.imgChassisDamage.Location = new System.Drawing.Point(29, 26);
+            this.imgChassisDamage.Name = "imgChassisDamage";
+            this.imgChassisDamage.Size = new System.Drawing.Size(75, 332);
+            this.imgChassisDamage.TabIndex = 15;
+            this.imgChassisDamage.TabStop = false;
             // 
-            // lblDistance
+            // lblEngineDamageTitle
             // 
-            this.lblDistance.AutoSize = true;
-            this.lblDistance.Location = new System.Drawing.Point(3, 235);
-            this.lblDistance.Name = "lblDistance";
-            this.lblDistance.Size = new System.Drawing.Size(77, 19);
-            this.lblDistance.TabIndex = 9;
-            this.lblDistance.Text = "Distance:";
+            this.lblEngineDamageTitle.AutoSize = true;
+            this.lblEngineDamageTitle.Location = new System.Drawing.Point(158, 4);
+            this.lblEngineDamageTitle.Name = "lblEngineDamageTitle";
+            this.lblEngineDamageTitle.Size = new System.Drawing.Size(127, 19);
+            this.lblEngineDamageTitle.TabIndex = 20;
+            this.lblEngineDamageTitle.Text = "Engine Damage";
             // 
-            // lblTarget
+            // lblEngineDamage
             // 
-            this.lblTarget.AutoSize = true;
-            this.lblTarget.Location = new System.Drawing.Point(3, 207);
-            this.lblTarget.Name = "lblTarget";
-            this.lblTarget.Size = new System.Drawing.Size(63, 19);
-            this.lblTarget.TabIndex = 5;
-            this.lblTarget.Text = "Target:";
+            this.lblEngineDamage.AutoSize = true;
+            this.lblEngineDamage.Location = new System.Drawing.Point(204, 361);
+            this.lblEngineDamage.Name = "lblEngineDamage";
+            this.lblEngineDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblEngineDamage.TabIndex = 19;
+            this.lblEngineDamage.Text = "0%";
             // 
-            // lblTruck
+            // imgEngineDamage
             // 
-            this.lblTruck.AutoSize = true;
-            this.lblTruck.Location = new System.Drawing.Point(3, 178);
-            this.lblTruck.Name = "lblTruck";
-            this.lblTruck.Size = new System.Drawing.Size(56, 19);
-            this.lblTruck.TabIndex = 4;
-            this.lblTruck.Text = "Truck:";
+            this.imgEngineDamage.BackColor = System.Drawing.Color.White;
+            this.imgEngineDamage.Location = new System.Drawing.Point(183, 26);
+            this.imgEngineDamage.Name = "imgEngineDamage";
+            this.imgEngineDamage.Size = new System.Drawing.Size(75, 332);
+            this.imgEngineDamage.TabIndex = 18;
+            this.imgEngineDamage.TabStop = false;
             // 
-            // lblCargo
+            // txtFrom
             // 
-            this.lblCargo.AutoSize = true;
-            this.lblCargo.Location = new System.Drawing.Point(3, 149);
-            this.lblCargo.Name = "lblCargo";
-            this.lblCargo.Size = new System.Drawing.Size(61, 19);
-            this.lblCargo.TabIndex = 3;
-            this.lblCargo.Text = "Cargo:";
+            this.txtFrom.Location = new System.Drawing.Point(15, 18);
+            this.txtFrom.Name = "txtFrom";
+            this.txtFrom.Size = new System.Drawing.Size(192, 26);
+            this.txtFrom.TabIndex = 0;
             // 
-            // lblPosition
+            // txtTo
             // 
-            this.lblPosition.AutoSize = true;
-            this.lblPosition.Location = new System.Drawing.Point(3, 45);
-            this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(70, 19);
-            this.lblPosition.TabIndex = 1;
-            this.lblPosition.Text = "Position:";
+            this.txtTo.Location = new System.Drawing.Point(15, 72);
+            this.txtTo.Name = "txtTo";
+            this.txtTo.Size = new System.Drawing.Size(192, 26);
+            this.txtTo.TabIndex = 1;
             // 
-            // lblFuel
+            // txtCargo
             // 
-            this.lblFuel.AutoSize = true;
-            this.lblFuel.Location = new System.Drawing.Point(3, 13);
-            this.lblFuel.Name = "lblFuel";
-            this.lblFuel.Size = new System.Drawing.Size(45, 19);
-            this.lblFuel.TabIndex = 0;
-            this.lblFuel.Text = "Fuel:";
+            this.txtCargo.Location = new System.Drawing.Point(15, 126);
+            this.txtCargo.Name = "txtCargo";
+            this.txtCargo.Size = new System.Drawing.Size(192, 26);
+            this.txtCargo.TabIndex = 2;
+            // 
+            // numDistance
+            // 
+            this.numDistance.Location = new System.Drawing.Point(15, 216);
+            this.numDistance.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numDistance.Name = "numDistance";
+            this.numDistance.Size = new System.Drawing.Size(192, 26);
+            this.numDistance.TabIndex = 3;
+            // 
+            // txtTruck
+            // 
+            this.txtTruck.Location = new System.Drawing.Point(15, 173);
+            this.txtTruck.Name = "txtTruck";
+            this.txtTruck.Size = new System.Drawing.Size(192, 26);
+            this.txtTruck.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(228, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 19);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "From";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(228, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 19);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "To";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(228, 129);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 19);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Cargo";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(228, 176);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Truck";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(228, 218);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 19);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Distance";
+            // 
+            // btnAddJob
+            // 
+            this.btnAddJob.Location = new System.Drawing.Point(15, 274);
+            this.btnAddJob.Name = "btnAddJob";
+            this.btnAddJob.Size = new System.Drawing.Size(285, 34);
+            this.btnAddJob.TabIndex = 10;
+            this.btnAddJob.Text = "Add Job";
+            this.btnAddJob.UseVisualStyleBackColor = true;
+            this.btnAddJob.Click += new System.EventHandler(this.BtnAddJob_Click);
             // 
             // frmEuroTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 468);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tabsTracker);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmEuroTracker";
             this.Text = "EuroTracker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgDamage)).EndInit();
+            this.tabsTracker.ResumeLayout(false);
+            this.tabDamage.ResumeLayout(false);
+            this.tabDamage.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgChassisDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgEngineDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDistance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,18 +291,26 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblFuel;
-        private System.Windows.Forms.Label lblPosition;
-        private System.Windows.Forms.Label lblCargo;
-        private System.Windows.Forms.Label lblTarget;
-        private System.Windows.Forms.Label lblTruck;
-        private System.Windows.Forms.Label lblDistance;
-        private System.Windows.Forms.Label lblMoney;
-        private System.Windows.Forms.Label lblEXP;
-        private System.Windows.Forms.PictureBox imgDamage;
-        private System.Windows.Forms.Label lblDamagePercentage;
-        private System.Windows.Forms.Label lblDamageTitle;
+        private System.Windows.Forms.TabControl tabsTracker;
+        private System.Windows.Forms.TabPage tabDamage;
+        private System.Windows.Forms.Label lblChassisDamageTitle;
+        private System.Windows.Forms.Label lblChassisDamage;
+        private System.Windows.Forms.PictureBox imgChassisDamage;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label lblEngineDamageTitle;
+        private System.Windows.Forms.Label lblEngineDamage;
+        private System.Windows.Forms.PictureBox imgEngineDamage;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtTruck;
+        private System.Windows.Forms.NumericUpDown numDistance;
+        private System.Windows.Forms.TextBox txtCargo;
+        private System.Windows.Forms.TextBox txtTo;
+        private System.Windows.Forms.TextBox txtFrom;
+        private System.Windows.Forms.Button btnAddJob;
     }
 }
 

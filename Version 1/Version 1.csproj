@@ -70,10 +70,13 @@
     <Compile Include="frmProfileSelector.Designer.cs">
       <DependentUpon>frmProfileSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfileData.cs" />
     <Compile Include="ProfileReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SavegameReader.cs" />
+    <Compile Include="SaveData.cs" />
+    <Compile Include="SaveReader.cs" />
+    <Compile Include="SaveWriter.cs" />
     <EmbeddedResource Include="frmEuroTracker.resx">
       <DependentUpon>frmEuroTracker.cs</DependentUpon>
     </EmbeddedResource>

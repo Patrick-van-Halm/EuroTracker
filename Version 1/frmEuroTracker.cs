@@ -14,6 +14,7 @@ namespace Version_1
         Ets2SdkTelemetry client;
         ProfileReader profile;
         SaveReader save;
+        SaveWriter savewriter;
         frmProfileSelector mainThread;
         DatabaseHandler dbHandler;
         Graphics gDamage;
@@ -29,13 +30,14 @@ namespace Version_1
             dbHandler = new DatabaseHandler();
             client = new Ets2SdkTelemetry();
             save = new SaveReader(profile.GetAutosaveLocation());
-            
+            savewriter = new SaveWriter(profile.GetAutosaveLocation());
+
             //Setup Syncing Voids
             client.Data += UpdateData;
             client.JobFinished += TelemetryOnJobFinished;
             client.JobStarted += TelemetryOnJobStarted;
 
-            gDamage = imgDamage.CreateGraphics();
+            gDamage = imgChassisDamage.CreateGraphics();
 
             //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
         }
@@ -63,15 +65,6 @@ namespace Version_1
                         return;
                     }
 
-                    lblFuel.Text = $"Fuel: {Math.Round(data.Drivetrain.Fuel)}/{Math.Round(data.Drivetrain.FuelMax)}";
-                    lblPosition.Text = $"Position: {data.Physics.CoordinateX}, {data.Physics.CoordinateY}, {data.Physics.CoordinateZ}";
-                    lblTruck.Text = $"Truck: {data.TruckId} {data.Truck} {data.Job.TrailerId}";
-                    lblCargo.Text = $"Cargo: {data.Job.Cargo}";
-                    lblTarget.Text = $"Target: {data.Job.CompanyDestination} in {data.Job.CityDestination}";
-                    lblDistance.Text = $"Distance: {Math.Round(data.Job.NavigationDistanceLeft / 1000, 1)} KM";
-                    lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
-                    lblEXP.Text = $"Experience: {profile.GetPlayerEXP()}";
-
                     UpdateDamage(data);
                     //if (!runned)
                     //{
@@ -86,62 +79,80 @@ namespace Version_1
 
         private void UpdateDamage(Ets2Telemetry data)
         {
-            
-            int stepHeight = imgDamage.Height / 100;
-            int chassisDamagePercentage = Convert.ToInt32(data.Damage.WearChassis * 100);
-            //int chassisDamagePercentage = 60;
-            int currentDamage = chassisDamagePercentage * stepHeight;
-
-
-            SolidBrush brush = new SolidBrush(Color.White);
-
-            if (chassisDamagePercentage < 25)
-                brush = new SolidBrush(Color.FromArgb(255, 170, 43));
-            else if (chassisDamagePercentage < 50)
-                brush = new SolidBrush(Color.Orange);
-            else if (chassisDamagePercentage < 75)
-                brush = new SolidBrush(Color.OrangeRed);
-            else if (chassisDamagePercentage < 100)
-                brush = new SolidBrush(Color.Red);
-
-            if (chassisDamagePercentage < 10)
-                lblDamagePercentage.Location = new Point(546, lblDamagePercentage.Location.Y);
-            else if (chassisDamagePercentage < 100)
-                lblDamagePercentage.Location = new Point(542, lblDamagePercentage.Location.Y);
-            else if (chassisDamagePercentage == 100)
-                lblDamagePercentage.Location = new Point(538, lblDamagePercentage.Location.Y);
-
-            
-
-            if (currentDamage != lastDamage)
-            {
-                lblDamagePercentage.Text = $"{chassisDamagePercentage}%";
-                gDamage.Clear(Color.White);
-                gDamage.FillRectangle(brush, new Rectangle(0, imgDamage.Height - currentDamage, imgDamage.Width, currentDamage));
-                lastDamage = currentDamage;
-            }
-            brush.Dispose();
+            DrawDamage(data.Damage.WearChassis, 50, lblChassisDamage, imgChassisDamage);
+            DrawDamage(data.Damage.WearEnigne, 204, lblEngineDamage, imgEngineDamage);
             DamageLegend();
         }
 
         private void DamageLegend()
         {
-            SolidBrush brush = new SolidBrush(Color.Black);
+            int legendPercentage = 10;
             Pen p = new Pen(Color.Black, 1);
+            DrawDamageLegend(legendPercentage, p, imgChassisDamage);
+            DrawDamageLegend(legendPercentage, p, imgEngineDamage);
+        }
 
-            int tenPercent = imgDamage.Height / 10;
+        private void DrawDamage(float damage, int lblStartPosX, Label lbl, PictureBox pic)
+        {
+            int stepHeight = imgChassisDamage.Height / 100;
+            int DamagePercentage = Convert.ToInt32(damage * 100);
+            //int chassisDamagePercentage = 60;
+            int currentDamage = DamagePercentage * stepHeight;
 
-            gDamage.DrawRectangle(p, new Rectangle(0, 0, imgDamage.Width-1, imgDamage.Height-1));
-            for (int i = 0; i < 10; i++)
+
+            SolidBrush brush = new SolidBrush(Color.White);
+            Graphics g = pic.CreateGraphics();
+
+            if (DamagePercentage < 25)
+                brush = new SolidBrush(Color.FromArgb(255, 170, 43));
+            else if (DamagePercentage < 50)
+                brush = new SolidBrush(Color.Orange);
+            else if (DamagePercentage < 75)
+                brush = new SolidBrush(Color.OrangeRed);
+            else if (DamagePercentage < 100)
+                brush = new SolidBrush(Color.Red);
+
+            if (DamagePercentage < 10)
+                lbl.Location = new Point(lblStartPosX, lbl.Location.Y);
+            else if (DamagePercentage < 100)
+                lbl.Location = new Point(lblStartPosX - 4, lbl.Location.Y);
+            else if (DamagePercentage == 100)
+                lbl.Location = new Point(lblStartPosX - 8, lbl.Location.Y);
+
+
+
+            if (lbl.Text != DamagePercentage + "%")
             {
-                gDamage.DrawLine(p, new Point(0, tenPercent * i), new Point(imgDamage.Width - 1, tenPercent * i));
+                lbl.Text = $"{DamagePercentage}%";
+                g.Clear(Color.White);
+                g.FillRectangle(brush, new Rectangle(0, imgChassisDamage.Height - currentDamage, imgChassisDamage.Width, currentDamage));
             }
             brush.Dispose();
         }
 
+        private void DrawDamageLegend(int percentage, Pen p, PictureBox pic)
+        {
+            Graphics g = pic.CreateGraphics();
+            int sizeOfSpace = pic.Height / percentage;
+
+            g.DrawRectangle(p, new Rectangle(0, 0, imgChassisDamage.Width - 1, imgChassisDamage.Height - 1));
+            for (int i = 0; i < percentage; i++)
+            {
+                g.DrawLine(p, new Point(0, sizeOfSpace * i), new Point(imgChassisDamage.Width - 1, sizeOfSpace * i));
+            }
+        }
+
+
         private void FrmEuroTracker_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainThread.Close();
+        }
+
+        private void BtnAddJob_Click(object sender, EventArgs e)
+        {
+            int distance = 0;
+            int.TryParse(numDistance.Value.ToString(), out distance);
+            savewriter.CreateJob(txtFrom.Text, txtCargo.Text, txtTruck.Text, txtTo.Text, distance);
         }
     }
 }
