@@ -70,7 +70,7 @@ namespace Version_1
                     lblTarget.Text = $"Target: {data.Job.CompanyDestination} in {data.Job.CityDestination}";
                     lblDistance.Text = $"Distance: {Math.Round(data.Job.NavigationDistanceLeft / 1000, 1)} KM";
                     lblMoney.Text = $"Money: {save.GetPlayerMoney()}";
-                    lblEXP.Text = $"Experience: {save.GetPlayerEXP()}";
+                    lblEXP.Text = $"Experience: {profile.GetPlayerEXP()}";
 
                     UpdateDamage(data);
                     //if (!runned)
