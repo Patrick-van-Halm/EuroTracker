@@ -13,7 +13,7 @@ namespace Version_1
 
         Ets2SdkTelemetry client;
         ProfileReader profile;
-        SavegameReader save;
+        SaveReader save;
         frmProfileSelector mainThread;
         DatabaseHandler dbHandler;
         Graphics gDamage;
@@ -28,7 +28,7 @@ namespace Version_1
 
             dbHandler = new DatabaseHandler();
             client = new Ets2SdkTelemetry();
-            save = new SavegameReader(profile.GetAutosaveLocation());
+            save = new SaveReader(profile.GetAutosaveLocation());
             
             //Setup Syncing Voids
             client.Data += UpdateData;
