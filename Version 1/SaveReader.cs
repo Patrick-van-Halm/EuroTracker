@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace Tools
 {
-    class SavegameReader : SaveData
+    class SaveReader : SaveData
     {      
         //CONSTRUCTOR
-        public SavegameReader(string autosave) : base()
+        public SaveReader(string autosave) : base()
         {
             currentAutosaveLocation = autosave;
         }
