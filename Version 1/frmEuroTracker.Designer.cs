@@ -37,16 +37,16 @@
             this.lblChassisDamageTitle = new System.Windows.Forms.Label();
             this.lblChassisDamage = new System.Windows.Forms.Label();
             this.imgChassisDamage = new System.Windows.Forms.PictureBox();
-            this.txtFrom = new System.Windows.Forms.TextBox();
-            this.txtTo = new System.Windows.Forms.TextBox();
-            this.txtCargo = new System.Windows.Forms.TextBox();
-            this.txtTruck = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnAddJob = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnAddJob = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTruck = new System.Windows.Forms.TextBox();
+            this.dropFrom = new System.Windows.Forms.ComboBox();
+            this.dropTo = new System.Windows.Forms.ComboBox();
+            this.dropCargo = new System.Windows.Forms.ComboBox();
             this.tabsTracker.SuspendLayout();
             this.tabDamage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgEngineDamage)).BeginInit();
@@ -144,69 +144,24 @@
             this.imgChassisDamage.TabIndex = 15;
             this.imgChassisDamage.TabStop = false;
             // 
-            // txtFrom
+            // tabPage2
             // 
-            this.txtFrom.Location = new System.Drawing.Point(15, 18);
-            this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(192, 26);
-            this.txtFrom.TabIndex = 0;
-            // 
-            // txtTo
-            // 
-            this.txtTo.Location = new System.Drawing.Point(15, 72);
-            this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(192, 26);
-            this.txtTo.TabIndex = 1;
-            // 
-            // txtCargo
-            // 
-            this.txtCargo.Location = new System.Drawing.Point(15, 126);
-            this.txtCargo.Name = "txtCargo";
-            this.txtCargo.Size = new System.Drawing.Size(192, 26);
-            this.txtCargo.TabIndex = 2;
-            // 
-            // txtTruck
-            // 
-            this.txtTruck.Location = new System.Drawing.Point(15, 176);
-            this.txtTruck.Name = "txtTruck";
-            this.txtTruck.Size = new System.Drawing.Size(192, 26);
-            this.txtTruck.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(228, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "From";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(228, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 19);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "To";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(228, 129);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 19);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Cargo";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(228, 179);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 19);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Truck";
+            this.tabPage2.Controls.Add(this.dropCargo);
+            this.tabPage2.Controls.Add(this.dropTo);
+            this.tabPage2.Controls.Add(this.dropFrom);
+            this.tabPage2.Controls.Add(this.btnAddJob);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.txtTruck);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(720, 388);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Add Job";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnAddJob
             // 
@@ -218,24 +173,81 @@
             this.btnAddJob.UseVisualStyleBackColor = true;
             this.btnAddJob.Click += new System.EventHandler(this.BtnAddJob_Click);
             // 
-            // tabPage2
+            // label4
             // 
-            this.tabPage2.Controls.Add(this.btnAddJob);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.txtTruck);
-            this.tabPage2.Controls.Add(this.txtCargo);
-            this.tabPage2.Controls.Add(this.txtTo);
-            this.tabPage2.Controls.Add(this.txtFrom);
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(720, 388);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Add Job";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(228, 179);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Truck";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(228, 129);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 19);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Cargo";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(228, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 19);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "To";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(228, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 19);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "From";
+            // 
+            // txtTruck
+            // 
+            this.txtTruck.Location = new System.Drawing.Point(15, 176);
+            this.txtTruck.Name = "txtTruck";
+            this.txtTruck.Size = new System.Drawing.Size(192, 26);
+            this.txtTruck.TabIndex = 4;
+            // 
+            // dropFrom
+            // 
+            this.dropFrom.DropDownHeight = 80;
+            this.dropFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropFrom.FormattingEnabled = true;
+            this.dropFrom.IntegralHeight = false;
+            this.dropFrom.Location = new System.Drawing.Point(15, 18);
+            this.dropFrom.Name = "dropFrom";
+            this.dropFrom.Size = new System.Drawing.Size(192, 27);
+            this.dropFrom.TabIndex = 11;
+            // 
+            // dropTo
+            // 
+            this.dropTo.DropDownHeight = 80;
+            this.dropTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropTo.FormattingEnabled = true;
+            this.dropTo.IntegralHeight = false;
+            this.dropTo.Location = new System.Drawing.Point(15, 72);
+            this.dropTo.Name = "dropTo";
+            this.dropTo.Size = new System.Drawing.Size(192, 27);
+            this.dropTo.TabIndex = 12;
+            // 
+            // dropCargo
+            // 
+            this.dropCargo.DropDownHeight = 80;
+            this.dropCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropCargo.FormattingEnabled = true;
+            this.dropCargo.IntegralHeight = false;
+            this.dropCargo.Location = new System.Drawing.Point(15, 126);
+            this.dropCargo.Name = "dropCargo";
+            this.dropCargo.Size = new System.Drawing.Size(192, 27);
+            this.dropCargo.TabIndex = 13;
             // 
             // frmEuroTracker
             // 
@@ -249,6 +261,7 @@
             this.Name = "frmEuroTracker";
             this.Text = "EuroTracker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
+            this.Load += new System.EventHandler(this.SetupAddJob);
             this.tabsTracker.ResumeLayout(false);
             this.tabDamage.ResumeLayout(false);
             this.tabDamage.PerformLayout();
@@ -279,9 +292,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTruck;
-        private System.Windows.Forms.TextBox txtCargo;
-        private System.Windows.Forms.TextBox txtTo;
-        private System.Windows.Forms.TextBox txtFrom;
+        private System.Windows.Forms.ComboBox dropCargo;
+        private System.Windows.Forms.ComboBox dropTo;
+        private System.Windows.Forms.ComboBox dropFrom;
     }
 }
 
