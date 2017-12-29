@@ -14,7 +14,7 @@ namespace Tools
             currentAutosaveLocation = autosave;
         }
 
-        public void CreateJob(string source, string cargo, string company_truck, string target, int distance)
+        public void CreateJob(string source, string cargo, string company_truck, string target)
         {
             string location = CreateNewSave(cargo + " to " + target);
             DecryptSii(location + "game.sii");
@@ -24,63 +24,30 @@ namespace Tools
             {
                 if(lines[i].Contains("company : company.volatile." + source))
                 {
-                    //Change Offers +1
-                    string offers_available_str = lines[i + 4].Replace(" job_offer: ", "");
-                    int offers_available = 0;
-                    int.TryParse(offers_available_str, out offers_available);
-                    offers_available++;
-                    lines[i + 4] = " job_offer: " + offers_available;
-
-                    //Add Offer
-                    string[] jobIdSplit = lines[i + 5].Replace(" job_offer[0]: ", "").Split('.');
-                    string jobId = "";
-                    for(int j = 0; j < jobIdSplit.Length -1; j++)
+                    string offerId = lines[i + 5].Replace(" job_offer[0]: ", "");
+                    int j = i;
+                    while(!lines[j].Contains(" discovered: "))
                     {
-                        jobId += jobIdSplit[j] + ".";
+                        j++;
                     }
-                    Random rnd = new Random();
-                    jobId += rnd.Next(0, 100) + "b" + rnd.Next(0, 10);
-                    lines.Insert(i + (4 + offers_available), $" job_offer[{offers_available - 1}]: " + jobId);
+                    lines[j] = " discovered: true";
 
-                    //Set source to discovered
-                    int tempi = i;
-                    while(lines[tempi] != "}")
-                    {
-                        tempi++;
-                    }
-                    lines[tempi - 1] = " discovered: true";
 
-                    //Add Job
-                    tempi++;
-                    for(int j = 0; j < offers_available - 1; j++)
+                    while (lines[j] != "job_offer_data : " + offerId + " {")
                     {
-                        tempi += 13;
+                        j++;
                     }
 
-                    string expire;
-                    int tempj = tempi;
-                    while(!lines[tempj].Contains(" expiration_time: "))
-                    {
-                        tempj++;
-                    }
-                    expire = lines[tempj].Replace(" expiration_time: ", "");
-
-                    string[] offerInfo = {
-                        "job_offer_data : " + jobId + " {",
-                        " cargo: " + cargo,
-                        " company_truck: " + company_truck,
-                        " variant: 0",
-                        " target: \"" + target + "\"",
-                        " expiration_time: " + expire,
-                        " urgency: 0",
-                        " shortest_distance_km: " + distance,
-                        " ferry_time: 35",
-                        " ferry_price: 300",
-                        " trailer_place: 0",
-                        "}",
-                        ""
-                    };
-                    lines.InsertRange(tempi + 1, offerInfo);
+                    lines[j + 1] = " cargo: " + cargo;
+                    lines[j + 2] = " company_truck: " + company_truck;
+                    lines[j + 3] = " variant: 0";
+                    lines[j + 4] = " target: \"" + target + "\"";
+                    //lines[j + 5] = " expiration_time: 6913416";
+                    lines[j + 6] = " urgency: 0";
+                    lines[j + 7] = " shortest_distance_km: 21000";
+                    lines[j + 8] = " ferry_time: 0";
+                    lines[j + 9] = " ferry_price: 0";
+                    lines[j + 10] = " trailer_place: 0";
                 }
             }
 
@@ -95,18 +62,34 @@ namespace Tools
         {
             string newSave = currentAutosaveLocation.Replace(@"autosave\game.sii", "") + $"customJob\\";
             Directory.CreateDirectory(newSave);
+            File.Copy("savegameLogo.tga", newSave + "preview.tga", true);
+            File.Copy("savegameLogo.tobj", newSave + "preview.tobj", true);
+            string[] saveLocation = currentAutosaveLocation.Split('\\');
+            string[] tobjFile = File.ReadAllLines(newSave + "preview.tobj");
+            StreamWriter sw = new StreamWriter(newSave + "preview.tobj", false);
+            foreach (string line in tobjFile)
+            {
+                if (line.Contains("edithere"))
+                {
+                    sw.WriteLine(line.Replace("edithere", saveLocation[6] + "/" + saveLocation[7] + "/customJob/preview.tga"));
+                }
+                else
+                    sw.WriteLine(line);
+            }
+            sw.Close();
+            File.Copy("savegameLogo.mat", newSave + "preview.mat", true);
             File.Copy(currentAutosaveLocation, newSave + "game.sii", true);
             File.Copy(currentAutosaveLocation.Replace("game.sii", "info.sii"), newSave + "info.sii", true);
 
             //CHANGE SAVEGAME NAME
             DecryptSii(newSave + "info.sii");
             string[] lines = File.ReadAllLines(newSave + "info.sii");
-            StreamWriter sw = new StreamWriter(newSave + "info.sii");
+            sw = new StreamWriter(newSave + "info.sii");
             for(int i = 0; i < lines.Length; i++)
             {
                 if(lines[i].Contains(" name: "))
                 {
-                    lines[i] = " name: \"Custom Job: " + DateTime.Now.ToShortDateString() + "\"";
+                    lines[i] = " name: \"Custom Job: " + DateTime.Now.ToShortDateString() + " (" + DateTime.Now.ToShortTimeString() + ")" + "\"";
                 }
                 sw.WriteLine(lines[i]);
             }

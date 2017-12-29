@@ -150,9 +150,7 @@ namespace Version_1
 
         private void BtnAddJob_Click(object sender, EventArgs e)
         {
-            int distance = 0;
-            int.TryParse(numDistance.Value.ToString(), out distance);
-            savewriter.CreateJob(txtFrom.Text, txtCargo.Text, txtTruck.Text, txtTo.Text, distance);
+            savewriter.CreateJob(txtFrom.Text, txtCargo.Text, txtTruck.Text, txtTo.Text);
         }
     }
 }
