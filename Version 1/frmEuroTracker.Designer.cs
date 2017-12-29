@@ -38,15 +38,15 @@
             this.lblChassisDamage = new System.Windows.Forms.Label();
             this.imgChassisDamage = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dropCargo = new System.Windows.Forms.ComboBox();
+            this.dropTo = new System.Windows.Forms.ComboBox();
+            this.dropFrom = new System.Windows.Forms.ComboBox();
             this.btnAddJob = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTruck = new System.Windows.Forms.TextBox();
-            this.dropFrom = new System.Windows.Forms.ComboBox();
-            this.dropTo = new System.Windows.Forms.ComboBox();
-            this.dropCargo = new System.Windows.Forms.ComboBox();
             this.tabsTracker.SuspendLayout();
             this.tabDamage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgEngineDamage)).BeginInit();
@@ -163,6 +163,39 @@
             this.tabPage2.Text = "Add Job";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // dropCargo
+            // 
+            this.dropCargo.DropDownHeight = 240;
+            this.dropCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropCargo.FormattingEnabled = true;
+            this.dropCargo.IntegralHeight = false;
+            this.dropCargo.Location = new System.Drawing.Point(15, 126);
+            this.dropCargo.Name = "dropCargo";
+            this.dropCargo.Size = new System.Drawing.Size(192, 27);
+            this.dropCargo.TabIndex = 13;
+            // 
+            // dropTo
+            // 
+            this.dropTo.DropDownHeight = 240;
+            this.dropTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropTo.FormattingEnabled = true;
+            this.dropTo.IntegralHeight = false;
+            this.dropTo.Location = new System.Drawing.Point(15, 72);
+            this.dropTo.Name = "dropTo";
+            this.dropTo.Size = new System.Drawing.Size(192, 27);
+            this.dropTo.TabIndex = 12;
+            // 
+            // dropFrom
+            // 
+            this.dropFrom.DropDownHeight = 240;
+            this.dropFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropFrom.FormattingEnabled = true;
+            this.dropFrom.IntegralHeight = false;
+            this.dropFrom.Location = new System.Drawing.Point(15, 18);
+            this.dropFrom.Name = "dropFrom";
+            this.dropFrom.Size = new System.Drawing.Size(192, 27);
+            this.dropFrom.TabIndex = 11;
+            // 
             // btnAddJob
             // 
             this.btnAddJob.Location = new System.Drawing.Point(15, 222);
@@ -215,39 +248,6 @@
             this.txtTruck.Name = "txtTruck";
             this.txtTruck.Size = new System.Drawing.Size(192, 26);
             this.txtTruck.TabIndex = 4;
-            // 
-            // dropFrom
-            // 
-            this.dropFrom.DropDownHeight = 80;
-            this.dropFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropFrom.FormattingEnabled = true;
-            this.dropFrom.IntegralHeight = false;
-            this.dropFrom.Location = new System.Drawing.Point(15, 18);
-            this.dropFrom.Name = "dropFrom";
-            this.dropFrom.Size = new System.Drawing.Size(192, 27);
-            this.dropFrom.TabIndex = 11;
-            // 
-            // dropTo
-            // 
-            this.dropTo.DropDownHeight = 80;
-            this.dropTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropTo.FormattingEnabled = true;
-            this.dropTo.IntegralHeight = false;
-            this.dropTo.Location = new System.Drawing.Point(15, 72);
-            this.dropTo.Name = "dropTo";
-            this.dropTo.Size = new System.Drawing.Size(192, 27);
-            this.dropTo.TabIndex = 12;
-            // 
-            // dropCargo
-            // 
-            this.dropCargo.DropDownHeight = 80;
-            this.dropCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropCargo.FormattingEnabled = true;
-            this.dropCargo.IntegralHeight = false;
-            this.dropCargo.Location = new System.Drawing.Point(15, 126);
-            this.dropCargo.Name = "dropCargo";
-            this.dropCargo.Size = new System.Drawing.Size(192, 27);
-            this.dropCargo.TabIndex = 13;
             // 
             // frmEuroTracker
             // 
