@@ -82,6 +82,10 @@ namespace Version_1
         {
             DrawDamage(data.Damage.WearChassis, 50, lblChassisDamage, imgChassisDamage);
             DrawDamage(data.Damage.WearEnigne, 204, lblEngineDamage, imgEngineDamage);
+            DrawDamage(data.Damage.WearCabin, 354, lblCabinDamage, imgCabinDamage);
+            DrawDamage(data.Damage.WearWheels, 507, lblWheelsDamage, imgWheelsDamage);
+            DrawDamage(data.Damage.WearTransmission, 669, lblTransmissionDamage, imgTransmissionDamage);
+            DrawDamage(data.Damage.WearTrailer, 842, lblTrailerDamage, imgTrailerDamage);
             DamageLegend();
         }
 
@@ -91,11 +95,15 @@ namespace Version_1
             Pen p = new Pen(Color.Black, 1);
             DrawDamageLegend(legendPercentage, p, imgChassisDamage);
             DrawDamageLegend(legendPercentage, p, imgEngineDamage);
+            DrawDamageLegend(legendPercentage, p, imgCabinDamage);
+            DrawDamageLegend(legendPercentage, p, imgWheelsDamage);
+            DrawDamageLegend(legendPercentage, p, imgTransmissionDamage);
+            DrawDamageLegend(legendPercentage, p, imgTrailerDamage);
         }
 
         private void DrawDamage(float damage, int lblStartPosX, Label lbl, PictureBox pic)
         {
-            int stepHeight = imgChassisDamage.Height / 100;
+            int stepHeight = pic.Height / 100;
             int DamagePercentage = Convert.ToInt32(damage * 100);
             //int chassisDamagePercentage = 60;
             int currentDamage = DamagePercentage * stepHeight;
@@ -110,7 +118,7 @@ namespace Version_1
                 brush = new SolidBrush(Color.Orange);
             else if (DamagePercentage < 75)
                 brush = new SolidBrush(Color.OrangeRed);
-            else if (DamagePercentage < 100)
+            else if (DamagePercentage <= 100)
                 brush = new SolidBrush(Color.Red);
 
             if (DamagePercentage < 10)
@@ -126,7 +134,7 @@ namespace Version_1
             {
                 lbl.Text = $"{DamagePercentage}%";
                 g.Clear(Color.White);
-                g.FillRectangle(brush, new Rectangle(0, imgChassisDamage.Height - currentDamage, imgChassisDamage.Width, currentDamage));
+                g.FillRectangle(brush, new Rectangle(0, pic.Height - currentDamage, pic.Width, currentDamage));
             }
             brush.Dispose();
         }

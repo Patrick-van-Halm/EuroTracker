@@ -47,11 +47,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTruck = new System.Windows.Forms.TextBox();
+            this.lblCabinDamageTitle = new System.Windows.Forms.Label();
+            this.lblCabinDamage = new System.Windows.Forms.Label();
+            this.imgCabinDamage = new System.Windows.Forms.PictureBox();
+            this.lblWheelsDamageTitle = new System.Windows.Forms.Label();
+            this.lblWheelsDamage = new System.Windows.Forms.Label();
+            this.imgWheelsDamage = new System.Windows.Forms.PictureBox();
+            this.lblTransmissionDamageTitle = new System.Windows.Forms.Label();
+            this.lblTransmissionDamage = new System.Windows.Forms.Label();
+            this.imgTransmissionDamage = new System.Windows.Forms.PictureBox();
+            this.lblTrailerDamageTitle = new System.Windows.Forms.Label();
+            this.lblTrailerDamage = new System.Windows.Forms.Label();
+            this.imgTrailerDamage = new System.Windows.Forms.PictureBox();
             this.tabsTracker.SuspendLayout();
             this.tabDamage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgEngineDamage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgChassisDamage)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCabinDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgWheelsDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTransmissionDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTrailerDamage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -68,14 +84,27 @@
             // 
             this.tabsTracker.Controls.Add(this.tabDamage);
             this.tabsTracker.Controls.Add(this.tabPage2);
-            this.tabsTracker.Location = new System.Drawing.Point(0, 48);
+            this.tabsTracker.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabsTracker.Location = new System.Drawing.Point(0, 43);
             this.tabsTracker.Name = "tabsTracker";
             this.tabsTracker.SelectedIndex = 0;
-            this.tabsTracker.Size = new System.Drawing.Size(728, 420);
+            this.tabsTracker.Size = new System.Drawing.Size(941, 420);
             this.tabsTracker.TabIndex = 2;
             // 
             // tabDamage
             // 
+            this.tabDamage.Controls.Add(this.lblTrailerDamageTitle);
+            this.tabDamage.Controls.Add(this.lblTrailerDamage);
+            this.tabDamage.Controls.Add(this.imgTrailerDamage);
+            this.tabDamage.Controls.Add(this.lblTransmissionDamageTitle);
+            this.tabDamage.Controls.Add(this.lblTransmissionDamage);
+            this.tabDamage.Controls.Add(this.imgTransmissionDamage);
+            this.tabDamage.Controls.Add(this.lblWheelsDamageTitle);
+            this.tabDamage.Controls.Add(this.lblWheelsDamage);
+            this.tabDamage.Controls.Add(this.imgWheelsDamage);
+            this.tabDamage.Controls.Add(this.lblCabinDamageTitle);
+            this.tabDamage.Controls.Add(this.lblCabinDamage);
+            this.tabDamage.Controls.Add(this.imgCabinDamage);
             this.tabDamage.Controls.Add(this.lblEngineDamageTitle);
             this.tabDamage.Controls.Add(this.lblEngineDamage);
             this.tabDamage.Controls.Add(this.imgEngineDamage);
@@ -85,7 +114,7 @@
             this.tabDamage.Location = new System.Drawing.Point(4, 28);
             this.tabDamage.Name = "tabDamage";
             this.tabDamage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDamage.Size = new System.Drawing.Size(720, 388);
+            this.tabDamage.Size = new System.Drawing.Size(933, 388);
             this.tabDamage.TabIndex = 0;
             this.tabDamage.Text = "Damage";
             this.tabDamage.UseVisualStyleBackColor = true;
@@ -93,7 +122,7 @@
             // lblEngineDamageTitle
             // 
             this.lblEngineDamageTitle.AutoSize = true;
-            this.lblEngineDamageTitle.Location = new System.Drawing.Point(158, 4);
+            this.lblEngineDamageTitle.Location = new System.Drawing.Point(156, 4);
             this.lblEngineDamageTitle.Name = "lblEngineDamageTitle";
             this.lblEngineDamageTitle.Size = new System.Drawing.Size(127, 19);
             this.lblEngineDamageTitle.TabIndex = 20;
@@ -102,7 +131,7 @@
             // lblEngineDamage
             // 
             this.lblEngineDamage.AutoSize = true;
-            this.lblEngineDamage.Location = new System.Drawing.Point(204, 361);
+            this.lblEngineDamage.Location = new System.Drawing.Point(204, 346);
             this.lblEngineDamage.Name = "lblEngineDamage";
             this.lblEngineDamage.Size = new System.Drawing.Size(34, 19);
             this.lblEngineDamage.TabIndex = 19;
@@ -113,7 +142,7 @@
             this.imgEngineDamage.BackColor = System.Drawing.Color.White;
             this.imgEngineDamage.Location = new System.Drawing.Point(183, 26);
             this.imgEngineDamage.Name = "imgEngineDamage";
-            this.imgEngineDamage.Size = new System.Drawing.Size(75, 332);
+            this.imgEngineDamage.Size = new System.Drawing.Size(72, 300);
             this.imgEngineDamage.TabIndex = 18;
             this.imgEngineDamage.TabStop = false;
             // 
@@ -129,7 +158,7 @@
             // lblChassisDamage
             // 
             this.lblChassisDamage.AutoSize = true;
-            this.lblChassisDamage.Location = new System.Drawing.Point(49, 361);
+            this.lblChassisDamage.Location = new System.Drawing.Point(49, 346);
             this.lblChassisDamage.Name = "lblChassisDamage";
             this.lblChassisDamage.Size = new System.Drawing.Size(34, 19);
             this.lblChassisDamage.TabIndex = 16;
@@ -140,7 +169,7 @@
             this.imgChassisDamage.BackColor = System.Drawing.Color.White;
             this.imgChassisDamage.Location = new System.Drawing.Point(29, 26);
             this.imgChassisDamage.Name = "imgChassisDamage";
-            this.imgChassisDamage.Size = new System.Drawing.Size(75, 332);
+            this.imgChassisDamage.Size = new System.Drawing.Size(72, 300);
             this.imgChassisDamage.TabIndex = 15;
             this.imgChassisDamage.TabStop = false;
             // 
@@ -249,16 +278,126 @@
             this.txtTruck.Size = new System.Drawing.Size(192, 26);
             this.txtTruck.TabIndex = 4;
             // 
+            // lblCabinDamageTitle
+            // 
+            this.lblCabinDamageTitle.AutoSize = true;
+            this.lblCabinDamageTitle.Location = new System.Drawing.Point(306, 4);
+            this.lblCabinDamageTitle.Name = "lblCabinDamageTitle";
+            this.lblCabinDamageTitle.Size = new System.Drawing.Size(120, 19);
+            this.lblCabinDamageTitle.TabIndex = 23;
+            this.lblCabinDamageTitle.Text = "Cabin Damage";
+            // 
+            // lblCabinDamage
+            // 
+            this.lblCabinDamage.AutoSize = true;
+            this.lblCabinDamage.Location = new System.Drawing.Point(354, 346);
+            this.lblCabinDamage.Name = "lblCabinDamage";
+            this.lblCabinDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblCabinDamage.TabIndex = 22;
+            this.lblCabinDamage.Text = "0%";
+            // 
+            // imgCabinDamage
+            // 
+            this.imgCabinDamage.BackColor = System.Drawing.Color.White;
+            this.imgCabinDamage.Location = new System.Drawing.Point(333, 26);
+            this.imgCabinDamage.Name = "imgCabinDamage";
+            this.imgCabinDamage.Size = new System.Drawing.Size(72, 300);
+            this.imgCabinDamage.TabIndex = 21;
+            this.imgCabinDamage.TabStop = false;
+            // 
+            // lblWheelsDamageTitle
+            // 
+            this.lblWheelsDamageTitle.AutoSize = true;
+            this.lblWheelsDamageTitle.Location = new System.Drawing.Point(453, 4);
+            this.lblWheelsDamageTitle.Name = "lblWheelsDamageTitle";
+            this.lblWheelsDamageTitle.Size = new System.Drawing.Size(130, 19);
+            this.lblWheelsDamageTitle.TabIndex = 26;
+            this.lblWheelsDamageTitle.Text = "Wheels Damage";
+            // 
+            // lblWheelsDamage
+            // 
+            this.lblWheelsDamage.AutoSize = true;
+            this.lblWheelsDamage.Location = new System.Drawing.Point(507, 346);
+            this.lblWheelsDamage.Name = "lblWheelsDamage";
+            this.lblWheelsDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblWheelsDamage.TabIndex = 25;
+            this.lblWheelsDamage.Text = "0%";
+            // 
+            // imgWheelsDamage
+            // 
+            this.imgWheelsDamage.BackColor = System.Drawing.Color.White;
+            this.imgWheelsDamage.Location = new System.Drawing.Point(486, 26);
+            this.imgWheelsDamage.Name = "imgWheelsDamage";
+            this.imgWheelsDamage.Size = new System.Drawing.Size(72, 300);
+            this.imgWheelsDamage.TabIndex = 24;
+            this.imgWheelsDamage.TabStop = false;
+            // 
+            // lblTransmissionDamageTitle
+            // 
+            this.lblTransmissionDamageTitle.AutoSize = true;
+            this.lblTransmissionDamageTitle.Location = new System.Drawing.Point(599, 4);
+            this.lblTransmissionDamageTitle.Name = "lblTransmissionDamageTitle";
+            this.lblTransmissionDamageTitle.Size = new System.Drawing.Size(171, 19);
+            this.lblTransmissionDamageTitle.TabIndex = 29;
+            this.lblTransmissionDamageTitle.Text = "Transmission Damage";
+            // 
+            // lblTransmissionDamage
+            // 
+            this.lblTransmissionDamage.AutoSize = true;
+            this.lblTransmissionDamage.Location = new System.Drawing.Point(669, 346);
+            this.lblTransmissionDamage.Name = "lblTransmissionDamage";
+            this.lblTransmissionDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblTransmissionDamage.TabIndex = 28;
+            this.lblTransmissionDamage.Text = "0%";
+            // 
+            // imgTransmissionDamage
+            // 
+            this.imgTransmissionDamage.BackColor = System.Drawing.Color.White;
+            this.imgTransmissionDamage.Location = new System.Drawing.Point(648, 26);
+            this.imgTransmissionDamage.Name = "imgTransmissionDamage";
+            this.imgTransmissionDamage.Size = new System.Drawing.Size(72, 300);
+            this.imgTransmissionDamage.TabIndex = 27;
+            this.imgTransmissionDamage.TabStop = false;
+            // 
+            // lblTrailerDamageTitle
+            // 
+            this.lblTrailerDamageTitle.AutoSize = true;
+            this.lblTrailerDamageTitle.Location = new System.Drawing.Point(793, 4);
+            this.lblTrailerDamageTitle.Name = "lblTrailerDamageTitle";
+            this.lblTrailerDamageTitle.Size = new System.Drawing.Size(125, 19);
+            this.lblTrailerDamageTitle.TabIndex = 32;
+            this.lblTrailerDamageTitle.Text = "Trailer Damage";
+            // 
+            // lblTrailerDamage
+            // 
+            this.lblTrailerDamage.AutoSize = true;
+            this.lblTrailerDamage.Location = new System.Drawing.Point(842, 346);
+            this.lblTrailerDamage.Name = "lblTrailerDamage";
+            this.lblTrailerDamage.Size = new System.Drawing.Size(34, 19);
+            this.lblTrailerDamage.TabIndex = 31;
+            this.lblTrailerDamage.Text = "0%";
+            // 
+            // imgTrailerDamage
+            // 
+            this.imgTrailerDamage.BackColor = System.Drawing.Color.White;
+            this.imgTrailerDamage.Location = new System.Drawing.Point(821, 26);
+            this.imgTrailerDamage.Name = "imgTrailerDamage";
+            this.imgTrailerDamage.Size = new System.Drawing.Size(72, 300);
+            this.imgTrailerDamage.TabIndex = 30;
+            this.imgTrailerDamage.TabStop = false;
+            // 
             // frmEuroTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 468);
+            this.ClientSize = new System.Drawing.Size(941, 463);
             this.Controls.Add(this.tabsTracker);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmEuroTracker";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EuroTracker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
             this.Load += new System.EventHandler(this.SetupAddJob);
@@ -269,6 +408,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgChassisDamage)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCabinDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgWheelsDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTransmissionDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTrailerDamage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,6 +438,18 @@
         private System.Windows.Forms.ComboBox dropCargo;
         private System.Windows.Forms.ComboBox dropTo;
         private System.Windows.Forms.ComboBox dropFrom;
+        private System.Windows.Forms.Label lblTransmissionDamageTitle;
+        private System.Windows.Forms.Label lblTransmissionDamage;
+        private System.Windows.Forms.PictureBox imgTransmissionDamage;
+        private System.Windows.Forms.Label lblWheelsDamageTitle;
+        private System.Windows.Forms.Label lblWheelsDamage;
+        private System.Windows.Forms.PictureBox imgWheelsDamage;
+        private System.Windows.Forms.Label lblCabinDamageTitle;
+        private System.Windows.Forms.Label lblCabinDamage;
+        private System.Windows.Forms.PictureBox imgCabinDamage;
+        private System.Windows.Forms.Label lblTrailerDamageTitle;
+        private System.Windows.Forms.Label lblTrailerDamage;
+        private System.Windows.Forms.PictureBox imgTrailerDamage;
     }
 }
 
