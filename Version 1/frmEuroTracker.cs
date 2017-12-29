@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.Diagnostics;
 using Tools;
+using System.IO;
 
 namespace Version_1
 {
@@ -150,7 +151,32 @@ namespace Version_1
 
         private void BtnAddJob_Click(object sender, EventArgs e)
         {
-            savewriter.CreateJob(txtFrom.Text, txtCargo.Text, txtTruck.Text, txtTo.Text);
+            savewriter.CreateJob(dropFrom.Text, dropCargo.Text, txtTruck.Text, dropTo.Text);
+        }
+
+        private void SetupAddJob(object sender, EventArgs e)
+        {
+            string companiesFile = "companies.txt";
+            string cargoFile = "cargo.txt";
+
+            string[] companies = LoadCompanies(companiesFile);
+            string[] cargo = LoadCargo(cargoFile);
+
+            dropFrom.Items.AddRange(companies);
+            dropTo.Items.AddRange(companies);
+            dropCargo.Items.AddRange(cargo);
+        }
+
+        private string[] LoadCompanies(string file)
+        {
+            string[] companies = File.ReadAllLines(file);
+            return companies;
+        }
+
+        private string[] LoadCargo(string file)
+        {
+            string[] cargo = File.ReadAllLines(file);
+            return cargo;
         }
     }
 }
