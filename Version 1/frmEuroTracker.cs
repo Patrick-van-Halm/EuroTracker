@@ -32,7 +32,7 @@ namespace Version_1
             dbHandler = new DatabaseHandler();
             client = new Ets2SdkTelemetry();
             save = new SaveReader(profile.GetAutosaveLocation());
-            savewriter = new SaveWriter(profile.GetAutosaveLocation());
+            savewriter = new SaveWriter(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
 
             //Setup Syncing Voids
             client.Data += UpdateData;

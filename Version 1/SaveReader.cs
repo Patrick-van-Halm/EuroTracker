@@ -6,9 +6,10 @@ namespace Tools
     class SaveReader : SaveData
     {      
         //CONSTRUCTOR
-        public SaveReader(string autosave) : base()
+        public SaveReader(string autosave, string quicksave) : base()
         {
             currentAutosaveLocation = autosave;
+            currentQuicksaveLocation = quicksave;
         }
         
         //METHODS
