@@ -81,13 +81,13 @@ namespace Version_1
 
         private void UpdateDamage(Ets2Telemetry data)
         {
+            DamageLegend();
             DrawDamage(data.Damage.WearChassis, 50, lblChassisDamage, imgChassisDamage);
             DrawDamage(data.Damage.WearEnigne, 204, lblEngineDamage, imgEngineDamage);
             DrawDamage(data.Damage.WearCabin, 354, lblCabinDamage, imgCabinDamage);
             DrawDamage(data.Damage.WearWheels, 507, lblWheelsDamage, imgWheelsDamage);
             DrawDamage(data.Damage.WearTransmission, 669, lblTransmissionDamage, imgTransmissionDamage);
             DrawDamage(data.Damage.WearTrailer, 842, lblTrailerDamage, imgTrailerDamage);
-            DamageLegend();
         }
 
         private void DamageLegend()
