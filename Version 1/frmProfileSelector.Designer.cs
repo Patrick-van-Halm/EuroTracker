@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProfileSelector));
             this.listboxProfiles = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
@@ -49,11 +50,11 @@
             this.ClientSize = new System.Drawing.Size(283, 290);
             this.Controls.Add(this.listboxProfiles);
             this.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmProfileSelector";
-            this.ShowIcon = false;
             this.Text = "Select Your Profile";
             this.Load += new System.EventHandler(this.FrmProfileSelector_Load);
             this.ResumeLayout(false);

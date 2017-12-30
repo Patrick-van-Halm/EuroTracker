@@ -160,10 +160,17 @@ namespace Version_1
 
         private void BtnAddJob_Click(object sender, EventArgs e)
         {
-            string from = dropFromCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropFromLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
-            string to = dropToCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropToLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
-            string cargo = "cargo." + dropCargo.SelectedItem.ToString().ToLower().Replace(" ", "_");
-            savewriter.CreateJob(from, cargo, "man_4x2_a", to);
+            if(dropFromCompany.SelectedItem.ToString() != "" && dropFromLocation.SelectedItem.ToString() != "" && dropToCompany.SelectedItem.ToString() != "" && dropToLocation.SelectedItem.ToString() != "" && dropCargo.SelectedItem.ToString() != "")
+            {
+                string from = dropFromCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropFromLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
+                string to = dropToCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropToLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
+                string cargo = "cargo." + dropCargo.SelectedItem.ToString().ToLower().Replace(" ", "_");
+                savewriter.CreateJob(from, cargo, "man_4x2_a", to);
+            }
+            else
+            {
+                MessageBox.Show("Fill in all the dropdown boxes!", "ERROR!");
+            }            
         }
 
         private void SetupAddJob(object sender, EventArgs e)
