@@ -62,29 +62,14 @@ namespace Tools
         {
             string newSave = currentAutosaveLocation.Replace(@"autosave\game.sii", "") + $"customJob\\";
             Directory.CreateDirectory(newSave);
-            File.Copy("savegameLogo.tga", newSave + "preview.tga", true);
-            File.Copy("savegameLogo.tobj", newSave + "preview.tobj", true);
-            string[] saveLocation = currentAutosaveLocation.Split('\\');
-            string[] tobjFile = File.ReadAllLines(newSave + "preview.tobj");
-            StreamWriter sw = new StreamWriter(newSave + "preview.tobj", false);
-            foreach (string line in tobjFile)
-            {
-                if (line.Contains("edithere"))
-                {
-                    sw.WriteLine(line.Replace("edithere", saveLocation[6] + "/" + saveLocation[7] + "/customJob/preview.tga"));
-                }
-                else
-                    sw.WriteLine(line);
-            }
-            sw.Close();
-            File.Copy("savegameLogo.mat", newSave + "preview.mat", true);
+            File.Copy("preview.mat", newSave + "preview.mat", true);
             File.Copy(currentAutosaveLocation, newSave + "game.sii", true);
             File.Copy(currentAutosaveLocation.Replace("game.sii", "info.sii"), newSave + "info.sii", true);
 
             //CHANGE SAVEGAME NAME
             DecryptSii(newSave + "info.sii");
             string[] lines = File.ReadAllLines(newSave + "info.sii");
-            sw = new StreamWriter(newSave + "info.sii");
+            StreamWriter sw = new StreamWriter(newSave + "info.sii");
             for(int i = 0; i < lines.Length; i++)
             {
                 if(lines[i].Contains(" name: "))
