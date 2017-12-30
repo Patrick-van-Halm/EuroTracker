@@ -14,6 +14,7 @@ namespace Tools
         protected string etsDataFolder;
         protected string currentProfileLocation;
         protected string currentAutosaveLocation;
+        protected string currentQuicksaveLocation;
 
         //CONSTRUCTOR
         public Data()
@@ -106,6 +107,11 @@ namespace Tools
         public string GetAutosaveLocation()
         {
             return currentAutosaveLocation;
+        }
+
+        public string GetQuicksaveLocation()
+        {
+            return currentQuicksaveLocation;
         }
     }
 }

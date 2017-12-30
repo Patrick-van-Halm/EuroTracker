@@ -60,11 +60,11 @@ namespace Tools
 
         private string CreateNewSave(string savename)
         {
-            string newSave = currentAutosaveLocation.Replace(@"autosave\game.sii", "") + $"customJob\\";
+            string newSave = currentQuicksaveLocation.Replace(@"quicksave\", "") + $"customJob\\";
             Directory.CreateDirectory(newSave);
-            File.Copy("preview.mat", newSave + "preview.mat", true);
-            File.Copy(currentAutosaveLocation, newSave + "game.sii", true);
-            File.Copy(currentAutosaveLocation.Replace("game.sii", "info.sii"), newSave + "info.sii", true);
+            //File.Copy("preview.mat", newSave + "preview.mat", true);
+            File.Copy(currentQuicksaveLocation + "game.sii", newSave + "game.sii", true);
+            File.Copy(currentQuicksaveLocation +"info.sii", newSave + "info.sii", true);
 
             //CHANGE SAVEGAME NAME
             DecryptSii(newSave + "info.sii");

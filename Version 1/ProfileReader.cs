@@ -47,6 +47,7 @@ namespace Tools
             {
                 if (currentProfileLocation != "")
                 {
+                    currentQuicksaveLocation = currentProfileLocation + @"\save\quicksave\";
                     currentAutosaveLocation = currentProfileLocation + @"\save\autosave\game.sii";
                     currentProfileLocation = currentProfileLocation + @"\profile.sii";
                     break;
