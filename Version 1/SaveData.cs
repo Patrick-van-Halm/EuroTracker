@@ -14,8 +14,20 @@ namespace Tools
 
         protected string lastJobSourceCity;
         protected string lastJobSourceCompany;
+
         protected string lastJobTargetCity;
         protected string lastJobTargetCompany;
+
+        protected string lastJobCargo;
+        protected string lastJobEXP;
+        protected string lastJobProfit;
+        protected string lastJobDrivenDistance;
+        protected string lastJobAverageConsumption;
+        protected string lastJobRemainingTime;
+        protected string lastJobInitialEarnings;
+        protected string lastJobVehicle;
+        protected string lastJobPlannedDistance;
+        protected string lastJobWeight;
 
         public SaveData()
         {

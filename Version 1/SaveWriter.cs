@@ -14,7 +14,7 @@ namespace Tools
             currentAutosaveLocation = autosave;
         }
 
-        public void CreateJob(string source, string cargo, string company_truck, string target)
+        public void CreateJob(string source, string cargo, string company_truck, string target, int distance = 1500)
         {
             string location = CreateNewSave(cargo + " to " + target);
             DecryptSii(location + "game.sii");
@@ -44,7 +44,7 @@ namespace Tools
                     lines[j + 4] = " target: \"" + target + "\"";
                     //lines[j + 5] = " expiration_time: 6913416765";
                     lines[j + 6] = " urgency: 0";
-                    lines[j + 7] = " shortest_distance_km: 21000";
+                    lines[j + 7] = " shortest_distance_km: " + distance;
                     lines[j + 8] = " ferry_time: 0";
                     lines[j + 9] = " ferry_price: 0";
                     lines[j + 10] = " trailer_place: 0";

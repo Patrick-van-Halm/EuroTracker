@@ -12,6 +12,12 @@ namespace Tools
         }
         
         //METHODS
+
+        public void UpdateAllSavedValues()
+        {
+
+        }
+
         private string GetLastJobVariable(int paramKey)
         {
             string jobId = GetLastJob();
@@ -88,6 +94,65 @@ namespace Tools
             lastJobSourceCompany = CapitalizeString(lastJobSourceCompany.Split('_'));
         }
 
+        private void GetLastJobTarget()
+        {
+            string[] toVariable = GetLastJobVariable(2).Split('.');
 
+            lastJobTargetCity = toVariable[toVariable.Length - 1];
+            lastJobTargetCity = CapitalizeString(lastJobTargetCity.Split('_'));
+
+            lastJobTargetCompany = toVariable[toVariable.Length - 2];
+            lastJobTargetCompany = CapitalizeString(lastJobTargetCompany.Split('_'));
+        }
+
+        private void GetLastJobCargo()
+        {
+
+        }
+
+        private void GetLastJobEXP()
+        {
+
+        }
+
+        private void GetLastJobProfit()
+        {
+
+        }
+
+        private void GetLastJobDrivenDistance()
+        {
+
+        }
+
+        private void GetLastJobAverageConsumption()
+        {
+
+        }
+
+        private void GetLastJobRemainingTime()
+        {
+
+        }
+
+        private void GetLastJobInitialEarnings()
+        {
+
+        }
+
+        private void GetLastJobVehicle()
+        {
+
+        }
+
+        private void GetLastJobPlannedDistance()
+        {
+
+        }
+
+        private void GetLastJobWeight()
+        {
+
+        }
     }
 }
