@@ -9,9 +9,10 @@ namespace Tools
 {
     class SaveWriter : SaveData
     {
-        public SaveWriter(string autosave)
+        public SaveWriter(string autosave, string quicksave)
         {
             currentAutosaveLocation = autosave;
+            currentQuicksaveLocation = quicksave;
         }
 
         public void CreateJob(string source, string cargo, string company_truck, string target, int distance = 1500)
