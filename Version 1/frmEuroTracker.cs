@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Diagnostics;
 using Tools;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Version_1
 {
@@ -98,7 +99,7 @@ namespace Version_1
             DrawDamageLegend(legendPercentage, p, imgCabinDamage);
             DrawDamageLegend(legendPercentage, p, imgWheelsDamage);
             DrawDamageLegend(legendPercentage, p, imgTransmissionDamage);
-            DrawDamageLegend(legendPercentage, p, imgTrailerDamage);
+            DrawDamageLegend(legendPercentage, p, imgTrailerDamage);        
         }
 
         private void DrawDamage(float damage, int lblStartPosX, Label lbl, PictureBox pic)
@@ -159,7 +160,10 @@ namespace Version_1
 
         private void BtnAddJob_Click(object sender, EventArgs e)
         {
-            savewriter.CreateJob(dropFrom.Text, dropCargo.Text, txtTruck.Text, dropTo.Text);
+            string from = dropFromCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropFromLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
+            string to = dropToCompany.SelectedItem.ToString().ToLower().Replace(" ", "_") + "." + dropToLocation.SelectedItem.ToString().ToLower().Replace(" ", "_");
+            string cargo = "cargo." + dropCargo.SelectedItem.ToString().ToLower().Replace(" ", "_");
+            savewriter.CreateJob(from, cargo, "man_4x2_a", to);
         }
 
         private void SetupAddJob(object sender, EventArgs e)
@@ -168,10 +172,35 @@ namespace Version_1
             string cargoFile = "cargo.txt";
 
             string[] companies = LoadCompanies(companiesFile);
+            List<string> locations = new List<string>();
+
+            for(int i = 0; i < companies.Length; i++)
+            {
+                bool locationInArray = false;
+                string location = CapitalizeString(companies[i].Split('.')[companies[i].Split('.').Length - 1]).Replace("_", " ");
+                foreach(string loc in locations)
+                {
+                    if (loc == location)
+                    {
+                        locationInArray = true;
+                        break;
+                    }
+                }
+                if (!locationInArray)
+                    locations.Add(location);
+            }
+
             string[] cargo = LoadCargo(cargoFile);
 
-            dropFrom.Items.AddRange(companies);
-            dropTo.Items.AddRange(companies);
+            for(int i = 0; i < cargo.Length; i++)
+            {
+                cargo[i] = CapitalizeString(cargo[i].Split('.')[cargo[i].Split('.').Length - 1]).Replace("_", " ");
+            }
+
+            dropFromLocation.Items.AddRange(locations.ToArray());
+            dropToLocation.Items.AddRange(locations.ToArray());
+            dropFromCompany.Items.Add("SELECT LOCATION!");
+            dropToCompany.Items.Add("SELECT LOCATION!");
             dropCargo.Items.AddRange(cargo);
         }
 
@@ -185,6 +214,51 @@ namespace Version_1
         {
             string[] cargo = File.ReadAllLines(file);
             return cargo;
+        }
+
+        private void FromLocationIndexChanged(object sender, EventArgs e)
+        {
+            string location = dropFromLocation.SelectedItem.ToString();
+
+            string[] companiesInSelectedLocation = GetCompaniesByLocation(location).ToArray();
+
+            dropFromCompany.Items.Clear();
+            dropFromCompany.Items.AddRange(companiesInSelectedLocation);
+        }
+
+        private List<string> GetCompaniesByLocation(string locationName)
+        {
+            string[] allLocations = File.ReadAllLines("companies.txt");
+            List<string> companiesInLocation = new List<string>();
+
+            foreach(string line in allLocations)
+            {
+                if (line.Contains(locationName.ToLower()))
+                {
+                    companiesInLocation.Add(CapitalizeString(line.Split('.')[line.Split('.').Length - 2]).Replace("_", " "));
+                }
+            }
+            return companiesInLocation;
+        }
+        public string CapitalizeString(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
+        }
+
+        private void ToLocationIndexChanged(object sender, EventArgs e)
+        {
+            string location = dropToLocation.SelectedItem.ToString();
+
+            string[] companiesInSelectedLocation = GetCompaniesByLocation(location).ToArray();
+
+            dropToCompany.Items.Clear();
+            dropToCompany.Items.AddRange(companiesInSelectedLocation);
         }
     }
 }
