@@ -74,7 +74,7 @@ namespace Tools
             {
                 if(lines[i].Contains(" name: "))
                 {
-                    lines[i] = " name: \"Custom Job: " + DateTime.Now.ToShortDateString() + " (" + DateTime.Now.ToShortTimeString() + ")" + "\"";
+                    lines[i] = " name: \"[EuroTracker] Custom Job (" + DateTime.Now.ToShortTimeString() + ")" + "\"";
                 }
                 sw.WriteLine(lines[i]);
             }
