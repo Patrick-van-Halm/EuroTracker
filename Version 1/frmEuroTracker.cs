@@ -18,10 +18,7 @@ namespace Version_1
         SaveReader save;
         SaveWriter savewriter;
         frmProfileSelector mainThread;
-        DatabaseHandler dbHandler;
-        Graphics gDamage;
-        int lastDamage = 0;
-        //bool runned = false;
+        DataHandler data;
 
         public frmEuroTracker(frmProfileSelector profiles)
         {
@@ -29,7 +26,7 @@ namespace Version_1
             profile = profiles.GetProfileReader();
             InitializeComponent();
 
-            dbHandler = new DatabaseHandler();
+            data = new DataHandler();
             client = new Ets2SdkTelemetry();
             save = new SaveReader(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
             savewriter = new SaveWriter(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
@@ -38,10 +35,6 @@ namespace Version_1
             client.Data += UpdateData;
             client.JobFinished += TelemetryOnJobFinished;
             client.JobStarted += TelemetryOnJobStarted;
-
-            gDamage = imgChassisDamage.CreateGraphics();
-
-            //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)

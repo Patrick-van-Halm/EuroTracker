@@ -16,7 +16,18 @@ namespace Tools
 
         public void UpdateAllSavedValues()
         {
-
+            GetLastJobSource();
+            GetLastJobAverageConsumptionFromFile();
+            GetLastJobCargoFromFile();
+            GetLastJobDrivenDistanceFromFile();
+            GetLastJobEXPFromFile();
+            GetLastJobInitialEarningsFromFile();
+            GetLastJobPlannedDistanceFromFile();
+            GetLastJobProfitFromFile();
+            GetLastJobRemainingTimeFromFile();
+            GetLastJobTarget();
+            GetLastJobWeightFromFile();
+            GetLastJobVehicleFromFile();
         }
 
         private string GetLastJobVariable(int paramKey)
@@ -106,54 +117,80 @@ namespace Tools
             lastJobTargetCompany = CapitalizeString(lastJobTargetCompany.Split('_'));
         }
 
-        private void GetLastJobCargo()
+        private void GetLastJobCargoFromFile()
         {
+            string[] cargoVariable = GetLastJobVariable(3).Split('.');
 
+            lastJobCargo = cargoVariable[cargoVariable.Length - 1];
+            lastJobCargo = CapitalizeString(lastJobCargo.Split('_'));
         }
 
-        private void GetLastJobEXP()
+        private void GetLastJobEXPFromFile()
         {
+            string exp = GetLastJobVariable(4);
 
+            int.TryParse(exp, out lastJobEXP);
         }
 
-        private void GetLastJobProfit()
+        private void GetLastJobProfitFromFile()
         {
+            string money = GetLastJobVariable(5);
 
+            int.TryParse(money, out lastJobProfit);
         }
 
-        private void GetLastJobDrivenDistance()
+        private void GetLastJobDrivenDistanceFromFile()
         {
+            string drivenDistance = GetLastJobVariable(6);
 
+            int.TryParse(drivenDistance, out lastJobDrivenDistance);
         }
 
-        private void GetLastJobAverageConsumption()
+        private void GetLastJobAverageConsumptionFromFile()
         {
+            string avgConsumption = GetLastJobVariable(7);
 
+            float.TryParse(avgConsumption, out lastJobAverageConsumption);
         }
 
-        private void GetLastJobRemainingTime()
+        private void GetLastJobRemainingTimeFromFile()
         {
+            string remTime = GetLastJobVariable(8);
 
+            int.TryParse(remTime, out lastJobRemainingTime);
         }
 
-        private void GetLastJobInitialEarnings()
+        private void GetLastJobInitialEarningsFromFile()
         {
+            string initialEarnings = GetLastJobVariable(13);
 
+            int.TryParse(initialEarnings, out lastJobInitialEarnings);
         }
 
-        private void GetLastJobVehicle()
+        private void GetLastJobVehicleFromFile()
         {
+            string[] vehicleCut = GetLastJobVariable(16).Split('.');
 
+            vehicleCut[vehicleCut.Length - 1] = vehicleCut[vehicleCut.Length - 1].ToUpper().Replace("_", " ");
+            vehicleCut[vehicleCut.Length - 2] = CapitalizeString(vehicleCut[vehicleCut.Length - 2]);
+            
+            string vehicle = vehicleCut[vehicleCut.Length - 2] + " " + vehicleCut[vehicleCut.Length - 1];
+
+            lastJobVehicle = vehicle;
         }
 
-        private void GetLastJobPlannedDistance()
+        private void GetLastJobPlannedDistanceFromFile()
         {
+            string plannedDistance = GetLastJobVariable(17);
 
+            int.TryParse(plannedDistance, out lastJobPlannedDistance);
         }
 
-        private void GetLastJobWeight()
+        private void GetLastJobWeightFromFile()
         {
+            string weight = GetLastJobVariable(22);
 
+            int.TryParse(weight, out lastJobWeight);
         }
     }
 }
