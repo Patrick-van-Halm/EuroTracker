@@ -21,6 +21,7 @@ namespace Version_1
         DatabaseHandler dbHandler;
         Graphics gDamage;
         int lastDamage = 0;
+        bool test = false;
         //bool runned = false;
 
         public frmEuroTracker(frmProfileSelector profiles)
@@ -41,7 +42,7 @@ namespace Version_1
 
             gDamage = imgChassisDamage.CreateGraphics();
 
-            //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
+            //dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'data.Manufacturer + " " + data.Truck', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
         }
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
@@ -68,16 +69,40 @@ namespace Version_1
                     }
 
                     UpdateDamage(data);
-                    //if (!runned)
+                    lblCurSpeed.Text = $"Current Speed: {Math.Round(data.Drivetrain.SpeedKmh)} KM/H - {Math.Round(data.Drivetrain.SpeedMph)} MP/H";
+                    //string jobStatus = CalculateJobStatus(data);
+                    //lblJobStatus.Text = $"Job Status: {jobStatus}";
+                    //if (!test)
                     //{
-                    //    dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
-                    //    runned = true;
+                    //    uint time = data.Time;
+                    //    lblIngameTime.Text = $"Current Time:";
+                    //    test = true;
                     //}
                 }
 
             }
             catch { }
         }
+
+        //private string CalculateJobStatus(Ets2Telemetry data)
+        //{
+        //    string status = "";
+            
+        //    double timeLeft = data.Job.NavigationTimeLeft / data.Drivetrain.SpeedKmh;
+        //    double deadline = data.Job.Deadline;
+
+        //    if(timeLeft > deadline || double.IsInfinity(timeLeft) || timeLeft < 0)
+        //    {
+        //        status = "LATE";
+        //    }
+        //    else if(timeLeft < deadline && !double.IsInfinity(timeLeft) && timeLeft > 0)
+        //    {
+        //        status = "ON TIME";
+        //    }
+        //    return status;
+        //}
+
+
 
         private void UpdateDamage(Ets2Telemetry data)
         {

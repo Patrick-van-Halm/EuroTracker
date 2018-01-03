@@ -32,6 +32,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabsTracker = new System.Windows.Forms.TabControl();
             this.tabDamage = new System.Windows.Forms.TabPage();
+            this.lblJobStatus = new System.Windows.Forms.Label();
+            this.lblCurSpeed = new System.Windows.Forms.Label();
             this.lblTrailerDamageTitle = new System.Windows.Forms.Label();
             this.lblTrailerDamage = new System.Windows.Forms.Label();
             this.imgTrailerDamage = new System.Windows.Forms.PictureBox();
@@ -69,6 +71,7 @@
             this.dropFromLocation = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddJob = new System.Windows.Forms.Button();
+            this.lblIngameTime = new System.Windows.Forms.Label();
             this.tabsTracker.SuspendLayout();
             this.tabDamage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgTrailerDamage)).BeginInit();
@@ -99,14 +102,17 @@
             this.tabsTracker.Controls.Add(this.tabDamage);
             this.tabsTracker.Controls.Add(this.tabPage2);
             this.tabsTracker.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabsTracker.Location = new System.Drawing.Point(0, 43);
+            this.tabsTracker.Location = new System.Drawing.Point(0, 37);
             this.tabsTracker.Name = "tabsTracker";
             this.tabsTracker.SelectedIndex = 0;
-            this.tabsTracker.Size = new System.Drawing.Size(941, 420);
+            this.tabsTracker.Size = new System.Drawing.Size(941, 704);
             this.tabsTracker.TabIndex = 2;
             // 
             // tabDamage
             // 
+            this.tabDamage.Controls.Add(this.lblIngameTime);
+            this.tabDamage.Controls.Add(this.lblJobStatus);
+            this.tabDamage.Controls.Add(this.lblCurSpeed);
             this.tabDamage.Controls.Add(this.lblTrailerDamageTitle);
             this.tabDamage.Controls.Add(this.lblTrailerDamage);
             this.tabDamage.Controls.Add(this.imgTrailerDamage);
@@ -128,10 +134,28 @@
             this.tabDamage.Location = new System.Drawing.Point(4, 28);
             this.tabDamage.Name = "tabDamage";
             this.tabDamage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDamage.Size = new System.Drawing.Size(933, 388);
+            this.tabDamage.Size = new System.Drawing.Size(933, 672);
             this.tabDamage.TabIndex = 0;
             this.tabDamage.Text = "Damage";
             this.tabDamage.UseVisualStyleBackColor = true;
+            // 
+            // lblJobStatus
+            // 
+            this.lblJobStatus.AutoSize = true;
+            this.lblJobStatus.Location = new System.Drawing.Point(9, 467);
+            this.lblJobStatus.Name = "lblJobStatus";
+            this.lblJobStatus.Size = new System.Drawing.Size(86, 19);
+            this.lblJobStatus.TabIndex = 34;
+            this.lblJobStatus.Text = "Job Status:";
+            // 
+            // lblCurSpeed
+            // 
+            this.lblCurSpeed.AutoSize = true;
+            this.lblCurSpeed.Location = new System.Drawing.Point(9, 423);
+            this.lblCurSpeed.Name = "lblCurSpeed";
+            this.lblCurSpeed.Size = new System.Drawing.Size(123, 19);
+            this.lblCurSpeed.TabIndex = 33;
+            this.lblCurSpeed.Text = "Current Speed:";
             // 
             // lblTrailerDamageTitle
             // 
@@ -301,7 +325,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(933, 388);
+            this.tabPage2.Size = new System.Drawing.Size(933, 672);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add Job";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -495,11 +519,20 @@
             this.btnAddJob.UseVisualStyleBackColor = true;
             this.btnAddJob.Click += new System.EventHandler(this.BtnAddJob_Click);
             // 
+            // lblIngameTime
+            // 
+            this.lblIngameTime.AutoSize = true;
+            this.lblIngameTime.Location = new System.Drawing.Point(9, 501);
+            this.lblIngameTime.Name = "lblIngameTime";
+            this.lblIngameTime.Size = new System.Drawing.Size(112, 19);
+            this.lblIngameTime.TabIndex = 35;
+            this.lblIngameTime.Text = "Current Time:";
+            // 
             // frmEuroTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 463);
+            this.ClientSize = new System.Drawing.Size(941, 741);
             this.Controls.Add(this.tabsTracker);
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -577,6 +610,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddJob;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCurSpeed;
+        private System.Windows.Forms.Label lblJobStatus;
+        private System.Windows.Forms.Label lblIngameTime;
     }
 }
 
