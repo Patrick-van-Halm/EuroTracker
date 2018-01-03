@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Tools;
@@ -15,6 +16,12 @@ namespace Version_1
 
         private void FrmProfileSelector_Load(object sender, EventArgs e)
         {
+            if (Process.GetProcessesByName("eurotrucks2.exe").Length == 0)
+            {
+                MessageBox.Show("Run Euro Truck Simulator 2 before opening Euro Tracker!", "ERROR!");
+                this.Close();
+            }
+
             listboxProfiles.Items.AddRange(profile.GetProfiles().ToArray());
         }
 
