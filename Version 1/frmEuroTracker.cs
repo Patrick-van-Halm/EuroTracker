@@ -19,6 +19,8 @@ namespace Version_1
         SaveWriter savewriter;
         frmProfileSelector mainThread;
         DataHandler data;
+        int trailerDamage;
+        int maxSpeed;
 
         public frmEuroTracker(frmProfileSelector profiles)
         {
@@ -30,6 +32,7 @@ namespace Version_1
             client = new Ets2SdkTelemetry();
             save = new SaveReader(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
             savewriter = new SaveWriter(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
+            maxSpeed = 0;
 
             //Setup Syncing Voids
             client.Data += UpdateData;
@@ -39,12 +42,15 @@ namespace Version_1
 
         private void TelemetryOnJobFinished(object sender, EventArgs args)
         {
+            //save.UpdateAllSavedValues(true);
+            data.LogJob(save.GetLastJobSourceCity(), save.GetLastJobTargetCity(), save.GetLastJobCargo(), save.GetLastJobWeight(), save.GetLastJobSourceCompany(), save.GetLastJobTargetCompany(), save.GetLastJobPlannedDistance(), save.GetLastJobDrivenDistance(), save.GetLastJobProfit(), save.GetLastJobEXP(), trailerDamage, save.GetLastJobRemainingTime(), save.GetLastJobTimeStarted(), save.GetLastJobTimeEnded(), save.GetLastJobVehicle(), save.GetLastJobAverageConsumption(), save.GetLastJobRefueledAmount(), save.GetLastJobRefueledAmountCost(), maxSpeed);
             //MessageBox.Show("Job finished, or at least unloaded nearby cargo destination.");
         }
 
         private void TelemetryOnJobStarted(object sender, EventArgs e)
         {
-            
+            save.UpdateAllSavedValues(false);
+            maxSpeed = 0;
         }
 
         private void UpdateData(Ets2Telemetry data, bool updated)
@@ -61,13 +67,27 @@ namespace Version_1
                     }
 
                     UpdateDamage(data);
-                    //if (!runned)
-                    //{
-                    //    dbHandler.Insert("INSERT INTO jobs VALUES (NULL, '1', 'Koln', 'Poznan', 'Diesel', '32000', 'Posped', 'FCP', '742', '874', '59444', '1992', '0', '20:00:00', '06:00:00', 'Volvo FH16 2012', '47.8', '12', '2', '90', CURRENT_TIMESTAMP);");
-                    //    runned = true;
-                    //}
-                }
 
+                    if (data.Job.OnJob)
+                    {
+                        if ((int)data.Physics.SpeedKmh > maxSpeed)
+                        {
+                            maxSpeed = (int)data.Physics.SpeedKmh;
+                        }
+
+                        if (data.Paused)
+                        {
+                            string oldJobId = save.GetLastJobId();
+                            save.UpdateAllSavedValues(true);
+                            string newJobId = save.GetLastJobId();
+                            if (newJobId != oldJobId)
+                            {
+                                TelemetryOnJobFinished(null, null);
+                                maxSpeed = 0;
+                            }
+                        }
+                    }
+                }
             }
             catch { }
         }
@@ -81,6 +101,7 @@ namespace Version_1
             DrawDamage(data.Damage.WearWheels, 507, lblWheelsDamage, imgWheelsDamage);
             DrawDamage(data.Damage.WearTransmission, 669, lblTransmissionDamage, imgTransmissionDamage);
             DrawDamage(data.Damage.WearTrailer, 842, lblTrailerDamage, imgTrailerDamage);
+            trailerDamage = (int)(data.Damage.WearTrailer * 100);
         }
 
         private void DamageLegend()
@@ -259,6 +280,11 @@ namespace Version_1
 
             dropToCompany.Items.Clear();
             dropToCompany.Items.AddRange(companiesInSelectedLocation);
+        }
+
+        private void FirstStartupSetup(object sender, EventArgs e)
+        {
+            save.UpdateAllSavedValues(true);
         }
     }
 }

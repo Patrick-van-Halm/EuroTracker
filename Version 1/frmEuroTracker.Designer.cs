@@ -509,9 +509,10 @@
             this.MaximizeBox = false;
             this.Name = "frmEuroTracker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EuroTracker";
+            this.Text = "w";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEuroTracker_FormClosing);
             this.Load += new System.EventHandler(this.SetupAddJob);
+            this.Shown += new System.EventHandler(this.FirstStartupSetup);
             this.tabsTracker.ResumeLayout(false);
             this.tabDamage.ResumeLayout(false);
             this.tabDamage.PerformLayout();

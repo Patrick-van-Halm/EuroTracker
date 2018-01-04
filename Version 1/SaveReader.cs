@@ -1,33 +1,53 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Tools
 {
     class SaveReader : SaveData
-    {      
+    {
+        DateTime lastAutosaveUpdate;
         //CONSTRUCTOR
         public SaveReader(string autosave, string quicksave) : base()
         {
             currentAutosaveLocation = autosave;
             currentQuicksaveLocation = quicksave;
+            lastAutosaveUpdate = File.GetLastWriteTime(autosave);
         }
         
         //METHODS
-
-        public void UpdateAllSavedValues()
-        {
-            GetLastJobSource();
-            GetLastJobAverageConsumptionFromFile();
-            GetLastJobCargoFromFile();
-            GetLastJobDrivenDistanceFromFile();
-            GetLastJobEXPFromFile();
-            GetLastJobInitialEarningsFromFile();
-            GetLastJobPlannedDistanceFromFile();
-            GetLastJobProfitFromFile();
-            GetLastJobRemainingTimeFromFile();
-            GetLastJobTarget();
-            GetLastJobWeightFromFile();
-            GetLastJobVehicleFromFile();
+        public void UpdateAllSavedValues(bool afterJob)
+        {   
+            if(lastAutosaveUpdate != File.GetLastWriteTime(currentAutosaveLocation))
+            {
+                if (afterJob)
+                {
+                    GetLastJobSource();
+                    GetLastJobAverageConsumptionFromFile();
+                    GetLastJobCargoFromFile();
+                    GetLastJobDrivenDistanceFromFile();
+                    GetLastJobEXPFromFile();
+                    GetLastJobInitialEarningsFromFile();
+                    GetLastJobPlannedDistanceFromFile();
+                    GetLastJobProfitFromFile();
+                    GetLastJobRemainingTimeFromFile();
+                    GetLastJobTarget();
+                    GetLastJobWeightFromFile();
+                    GetLastJobVehicleFromFile();
+                    GetLastJobTimeStartedFromFile();
+                    GetLastJobTimeEndedFromFile();
+                    GetRefueledAfterJobFromFile();
+                    GetMoney();
+                }
+                else
+                {
+                    GetRefueledBeforeJobFromFile();
+                    GetMoney();
+                    GetLastJob();
+                }
+                lastAutosaveUpdate = File.GetLastWriteTime(currentAutosaveLocation);
+            }            
         }
 
         private string GetLastJobVariable(int paramKey)
@@ -81,6 +101,7 @@ namespace Tools
                             line = sr.ReadLine();
                         }
                         line = line.Replace($" entries[{i - 1}]: ", "");
+                        lastJobid = line;
                         return line;
                     }
                 }
@@ -170,11 +191,45 @@ namespace Tools
         private void GetLastJobVehicleFromFile()
         {
             string[] vehicleCut = GetLastJobVariable(16).Split('.');
-
-            vehicleCut[vehicleCut.Length - 1] = vehicleCut[vehicleCut.Length - 1].ToUpper().Replace("_", " ");
+            
             vehicleCut[vehicleCut.Length - 2] = CapitalizeString(vehicleCut[vehicleCut.Length - 2]);
             
+            switch(vehicleCut[vehicleCut.Length - 1])
+            {
+                case "actros2014":
+                    vehicleCut[vehicleCut.Length - 1] = "Actros 2014";
+                    break;
+
+                case "fh16":
+                    vehicleCut[vehicleCut.Length - 1] = "FH16";
+                    break;
+
+                case "xf_euro6":
+                    vehicleCut[vehicleCut.Length - 1] = "XF Euro 6";
+                    break;
+
+                case "fh16_2012":
+                    vehicleCut[vehicleCut.Length - 1] = "FH16 2012";
+                    break;
+
+                case "xf":
+                    vehicleCut[vehicleCut.Length - 1] = "XF";
+                    break;
+
+                default:
+                    vehicleCut[vehicleCut.Length - 1] = vehicleCut[vehicleCut.Length - 1].ToUpper().Replace("_", "");
+                    break;
+            }
+
+
+
             string vehicle = vehicleCut[vehicleCut.Length - 2] + " " + vehicleCut[vehicleCut.Length - 1];
+
+
+
+
+
+
 
             lastJobVehicle = vehicle;
         }
@@ -189,8 +244,73 @@ namespace Tools
         private void GetLastJobWeightFromFile()
         {
             string weight = GetLastJobVariable(22);
-
-            int.TryParse(weight, out lastJobWeight);
+            float tempWeight;
+            float.TryParse(weight, out tempWeight);
+            lastJobWeight = (int)tempWeight;
         }
+
+        private void GetLastJobTimeStartedFromFile()
+        {
+            string timeStarted = GetLastJobVariable(0);
+
+            int.TryParse(timeStarted, out lastJobTimeStarted);
+        }
+
+        private void GetLastJobTimeEndedFromFile()
+        {
+            string timeEnded = GetLastJobVariable(15);
+
+            int.TryParse(timeEnded, out lastJobTimeEnded);
+        }
+
+        private void GetRefueledBeforeJobFromFile()
+        {
+            string fuelAmount_str = "";
+            string fuelAmountCost_str = "";
+            if (File.Exists(currentAutosaveLocation))
+            {
+                DecryptSii(currentAutosaveLocation);
+                StreamReader sr = new StreamReader(currentAutosaveLocation);
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if (line.Contains($" total_fuel_litres: "))
+                    {
+                        fuelAmount_str = line.Replace(" total_fuel_litres: ", "");
+                        fuelAmountCost_str = sr.ReadLine().Replace(" total_fuel_price: ", "");
+                    }
+                }
+            }
+            int.TryParse(fuelAmount_str, out refueledAmountBeforeJob);
+            int.TryParse(fuelAmountCost_str, out refueledAmountCostBeforeJob);
+        }
+
+        private void GetRefueledAfterJobFromFile()
+        {
+            string fuelAmount_str = "";
+            string fuelAmountCost_str = "";
+            int fuelAmountAfterJob = 0;
+            int fuelAmountCostAfterJob = 0;
+            if (File.Exists(currentAutosaveLocation))
+            {
+                DecryptSii(currentAutosaveLocation);
+                StreamReader sr = new StreamReader(currentAutosaveLocation);
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if (line.Contains($" total_fuel_litres: "))
+                    {
+                        fuelAmount_str = line.Replace(" total_fuel_litres: ", "");
+                        fuelAmountCost_str = sr.ReadLine().Replace(" total_fuel_price: ", "");
+                    }
+                }
+            }
+            int.TryParse(fuelAmount_str, out fuelAmountAfterJob);
+            int.TryParse(fuelAmountCost_str, out fuelAmountCostAfterJob);
+
+            lastJobRefueledAmount = refueledAmountBeforeJob - fuelAmountAfterJob;
+            lastJobRefueledAmountCost = refueledAmountCostBeforeJob - fuelAmountCostAfterJob;
+        }
+        
     }
 }

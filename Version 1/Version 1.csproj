@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="DataHandler.cs" />
     <Compile Include="frmEuroTracker.cs">
       <SubType>Form</SubType>
     </Compile>
