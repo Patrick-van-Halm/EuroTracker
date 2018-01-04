@@ -17,15 +17,48 @@ namespace Tools
         }
 
         //GET PROFILES
-        public List<object> GetProfiles()
+        public List<string> GetProfiles()
         {
-            List<object> profiles = new List<object>();
+            List<string> profiles = new List<string>();
+            List<string> profileFile = new List<string>();
+
             foreach (string dir in Directory.GetDirectories(profilesLocation))
             {
-                if (File.Exists(dir + @"\profile.sii"))
+                bool profileInserted = false;
+                string profile = dir + @"\profile.sii";
+                if (File.Exists(profile))
                 {
-                    DecryptSii(dir + @"\profile.sii");
-                    StreamReader sr = new StreamReader(dir + @"\profile.sii");
+                    if(profileFile.Count > 0)
+                    {
+                        for(int i = 0; i < profileFile.Count; i++)
+                        {
+                            if(File.GetLastWriteTime(profileFile[i]) < File.GetLastWriteTime(profile))
+                            {
+                                profileFile.Insert(i, profile);
+                                profileInserted = true;
+                                break;
+                            }
+                        }
+                        if (!profileInserted)
+                            profileFile.Add(profile);
+                    }
+                    else
+                    {
+                        profileFile.Add(profile);
+                    }
+                    
+
+                    //SORT
+                    //NEXT FOREACH IS FOREACH PROFILEFILE
+                }
+            }
+
+            foreach (string profile in profileFile)
+            {
+                if (File.Exists(profile))
+                {
+                    DecryptSii(profile);
+                    StreamReader sr = new StreamReader(profile);
                     while (!sr.EndOfStream)
                     {
                         string line = sr.ReadLine();
@@ -36,7 +69,6 @@ namespace Tools
                         }
                     }
                 }
-
             }
             return profiles;
         }

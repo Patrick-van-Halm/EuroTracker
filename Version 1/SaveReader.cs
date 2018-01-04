@@ -220,17 +220,8 @@ namespace Tools
                     vehicleCut[vehicleCut.Length - 1] = vehicleCut[vehicleCut.Length - 1].ToUpper().Replace("_", "");
                     break;
             }
-
-
-
             string vehicle = vehicleCut[vehicleCut.Length - 2] + " " + vehicleCut[vehicleCut.Length - 1];
-
-
-
-
-
-
-
+            
             lastJobVehicle = vehicle;
         }
 
