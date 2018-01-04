@@ -11,7 +11,7 @@ namespace Tools
     {
         protected int playerMoney;
 
-
+        protected string lastJobid;
         protected string lastJobSourceCity;
         protected string lastJobSourceCompany;
 
@@ -28,6 +28,8 @@ namespace Tools
         protected string lastJobVehicle;
         protected int lastJobPlannedDistance;
         protected int lastJobWeight;
+        protected int lastJobTimeStarted;
+        protected int lastJobTimeEnded;
 
         protected int lastJobRefueledAmount;
         protected int lastJobRefueledAmountCost;
@@ -38,7 +40,7 @@ namespace Tools
         public SaveData()
         {
             playerMoney = 0;
-
+            lastJobid = "";
             lastJobSourceCity = "";
             lastJobSourceCompany = "";
             lastJobTargetCity = "";
@@ -72,6 +74,16 @@ namespace Tools
         public string GetLastJobSourceCompany()
         {
             return lastJobSourceCompany;
+        }
+
+        public string GetLastJobTargetCity()
+        {
+            return lastJobTargetCity;
+        }
+
+        public string GetLastJobTargetCompany()
+        {
+            return lastJobTargetCompany;
         }
 
         public string GetLastJobCargo()
@@ -132,6 +144,21 @@ namespace Tools
         public int GetLastJobRefueledAmountCost()
         {
             return lastJobRefueledAmountCost;
+        }
+
+        public int GetLastJobTimeStarted()
+        {
+            return lastJobTimeStarted;
+        }
+
+        public int GetLastJobTimeEnded()
+        {
+            return lastJobTimeEnded;
+        }
+
+        public string GetLastJobId()
+        {
+            return lastJobid;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Tools
                         string line = sr.ReadLine();
                         if (line.Contains(" profile_name: "))
                         {
-                            line = line.Replace(" profile_name: ", "");
+                            line = line.Replace(" profile_name: ", "").Replace("\"", "");
                             profiles.Add(line);
                         }
                     }
@@ -60,7 +60,7 @@ namespace Tools
                     string line = sr.ReadLine();
                     if (line.Contains(" profile_name: "))
                     {
-                        line = line.Replace(" profile_name: ", "");
+                        line = line.Replace(" profile_name: ", "").Replace("\"", "");
                         if (line == profileName)
                         {
                             currentProfileLocation = dir;
