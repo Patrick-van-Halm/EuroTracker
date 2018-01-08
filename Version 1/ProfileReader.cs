@@ -46,10 +46,6 @@ namespace Tools
                     {
                         profileFile.Add(profile);
                     }
-                    
-
-                    //SORT
-                    //NEXT FOREACH IS FOREACH PROFILEFILE
                 }
             }
 
@@ -77,13 +73,6 @@ namespace Tools
         {
             foreach (string dir in Directory.GetDirectories(profilesLocation))
             {
-                if (currentProfileLocation != "")
-                {
-                    currentQuicksaveLocation = currentProfileLocation + @"\save\quicksave\";
-                    currentAutosaveLocation = currentProfileLocation + @"\save\autosave\game.sii";
-                    currentProfileLocation = currentProfileLocation + @"\profile.sii";
-                    break;
-                }
 
                 DecryptSii(dir + @"\profile.sii");
                 StreamReader sr = new StreamReader(dir + @"\profile.sii");
@@ -100,6 +89,12 @@ namespace Tools
                         }
                     }
                 }
+            }
+            if (currentProfileLocation != "")
+            {
+                currentQuicksaveLocation = currentProfileLocation + @"\save\quicksave\";
+                currentAutosaveLocation = currentProfileLocation + @"\save\autosave\game.sii";
+                currentProfileLocation = currentProfileLocation + @"\profile.sii";
             }
         }
 

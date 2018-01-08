@@ -21,6 +21,7 @@ namespace Version_1
         DataHandler data;
         int trailerDamage;
         int maxSpeed;
+        float avgFuelConsumption;
 
         public frmEuroTracker(frmProfileSelector profiles)
         {
@@ -33,6 +34,7 @@ namespace Version_1
             save = new SaveReader(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
             savewriter = new SaveWriter(profile.GetAutosaveLocation(), profile.GetQuicksaveLocation());
             maxSpeed = 0;
+            avgFuelConsumption = 0;
 
             //Setup Syncing Voids
             client.Data += UpdateData;
@@ -43,7 +45,7 @@ namespace Version_1
         private void TelemetryOnJobFinished(object sender, EventArgs args)
         {
             //save.UpdateAllSavedValues(true);
-            data.LogJob(save.GetLastJobSourceCity(), save.GetLastJobTargetCity(), save.GetLastJobCargo(), save.GetLastJobWeight(), save.GetLastJobSourceCompany(), save.GetLastJobTargetCompany(), save.GetLastJobPlannedDistance(), save.GetLastJobDrivenDistance(), save.GetLastJobProfit(), save.GetLastJobEXP(), trailerDamage, save.GetLastJobRemainingTime(), save.GetLastJobTimeStarted(), save.GetLastJobTimeEnded(), save.GetLastJobVehicle(), save.GetLastJobAverageConsumption(), save.GetLastJobRefueledAmount(), save.GetLastJobRefueledAmountCost(), maxSpeed);
+            data.LogJob(save.GetLastJobSourceCity(), save.GetLastJobTargetCity(), save.GetLastJobCargo(), save.GetLastJobWeight(), save.GetLastJobSourceCompany(), save.GetLastJobTargetCompany(), save.GetLastJobPlannedDistance(), save.GetLastJobDrivenDistance(), save.GetLastJobInitialEarnings(), save.GetLastJobProfit(), save.GetLastJobEXP(), trailerDamage, save.GetLastJobRemainingTime(), save.GetLastJobTimeStarted(), save.GetLastJobTimeEnded(), save.GetLastJobVehicle(), avgFuelConsumption, save.GetLastJobRefueledAmount(), save.GetLastJobRefueledAmountCost(), maxSpeed);
             //MessageBox.Show("Job finished, or at least unloaded nearby cargo destination.");
         }
 
@@ -51,6 +53,7 @@ namespace Version_1
         {
             save.UpdateAllSavedValues(false);
             maxSpeed = 0;
+            avgFuelConsumption = 0;
         }
 
         private void UpdateData(Ets2Telemetry data, bool updated)
@@ -74,7 +77,7 @@ namespace Version_1
                         {
                             maxSpeed = (int)data.Physics.SpeedKmh;
                         }
-
+                        avgFuelConsumption = data.Drivetrain.FuelAvgConsumption;
                         if (data.Paused)
                         {
                             string oldJobId = save.GetLastJobId();
@@ -84,6 +87,7 @@ namespace Version_1
                             {
                                 TelemetryOnJobFinished(null, null);
                                 maxSpeed = 0;
+                                avgFuelConsumption = 0;
                             }
                         }
                     }
