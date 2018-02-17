@@ -8,10 +8,11 @@ namespace Version_1
 {
     public partial class frmProfileSelector : Form
     {
-        ProfileReader profile = new ProfileReader();
+        ProfileReader profile;
         public frmProfileSelector()
         {
             InitializeComponent();
+            
         }
 
         private void FrmProfileSelector_Load(object sender, EventArgs e)
@@ -21,7 +22,7 @@ namespace Version_1
                 MessageBox.Show("Run Euro Truck Simulator 2 before opening Euro Tracker!", "ERROR!");
                 this.Close();
             }
-
+            profile = new ProfileReader(this);
             listboxProfiles.Items.AddRange(profile.GetProfiles().ToArray());
         }
 

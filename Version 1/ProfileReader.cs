@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Version_1;
 
 namespace Tools
 {
@@ -11,9 +13,68 @@ namespace Tools
     {
         private string profilesLocation;
 
-        public ProfileReader() : base()
+        public ProfileReader(frmProfileSelector frm) : base()
         {
+            frmProfileSelector frmProfile = frm;
             profilesLocation = etsDataFolder + @"profiles\";
+
+            if(File.Exists(etsDataFolder + @"config.cfg"))
+            {
+                int i = 0;
+                bool valueChanged = false;
+                bool valueExists = false;
+                string[] lines = File.ReadAllLines(etsDataFolder + "config.cfg");
+
+                foreach(string line in lines)
+                {
+                    if(line.Contains("uset g_save_format "))
+                    {
+                        valueExists = true;
+                        if(line != "uset g_save_format \"2\"")
+                        {
+                            valueChanged = true;
+                            lines[i] = "uset g_save_format \"2\"";
+                        }
+                    }
+                    i++;
+                }
+
+                if (!valueExists && !valueChanged)
+                {
+                    string[] newconfig = new string[lines.Length + 1];
+                    i = 0;
+                    foreach(string line in lines)
+                    {
+                        newconfig[i] = line;
+                        i++;
+                    }
+                    newconfig[newconfig.Length -1] = "uset g_save_format \"2\"";
+                    File.Delete(etsDataFolder + "config.cfg");
+                    StreamWriter sw = new StreamWriter(etsDataFolder + "config.cfg");
+                    foreach(string cfgLine in newconfig)
+                    {
+                        sw.WriteLine(cfgLine);
+                    }
+                    sw.Close();
+                    valueChanged = true;
+                }
+                else
+                {
+                    File.Delete(etsDataFolder + "config.cfg");
+                    StreamWriter sw = new StreamWriter(etsDataFolder + "config.cfg");
+                    foreach (string line in lines)
+                    {
+                        sw.WriteLine(line);
+                    }
+                    sw.Close();
+                }
+
+                if (valueExists && valueChanged)
+                {
+                    MessageBox.Show(frmProfile, "Please Restart ETS 2 and relaunch EuroTracker!\nWe Initialized ETS 2 for first use!");
+                    frmProfile.Close();
+                }
+            }
         }
 
         //GET PROFILES
